@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a559e16-0493-4e9c-98d5-68bb93265b65" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mapping/aaa.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/spring-mybatis.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/spring-mybatis.xml" afterDir="false" />
     </list>
@@ -64,8 +65,8 @@
       <file leaf-file-name="spring-mybatis.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/config/spring/spring-mybatis.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1134">
-              <caret line="63" column="76" selection-start-line="63" selection-start-column="76" selection-end-line="63" selection-end-column="76" />
+            <state relative-caret-position="707">
+              <caret line="71" column="89" selection-start-line="71" selection-start-column="89" selection-end-line="71" selection-end-column="89" />
               <folding>
                 <element signature="e#1463#1479#0" expanded="true" />
                 <element signature="e#1517#1530#0" expanded="true" />
@@ -79,6 +80,11 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="aaa.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mapping/aaa.xml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -177,6 +183,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PR_system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PR_system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mapping" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PR_system" type="b2602c69:ProjectViewProjectNode" />
@@ -323,7 +338,7 @@
       <option name="presentableId" value="Default" />
       <updated>1537598904002</updated>
       <workItem from="1537598907652" duration="5543000" />
-      <workItem from="1537670479607" duration="8489000" />
+      <workItem from="1537670479607" duration="9029000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1537599723059</created>
@@ -374,15 +389,21 @@
       <option name="project" value="LOCAL" />
       <updated>1537699571632</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update">
+      <created>1537708236956</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1537708236956</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14032000" />
+    <option name="totallyTimeSpent" value="14572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="FindBugs-IDEA" />
@@ -529,10 +550,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mapping/aaa.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/spring/spring-mybatis.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="63" column="76" selection-start-line="63" selection-start-column="76" selection-end-line="63" selection-end-column="76" />
+        <state relative-caret-position="707">
+          <caret line="71" column="89" selection-start-line="71" selection-start-column="89" selection-end-line="71" selection-end-column="89" />
           <folding>
             <element signature="e#1463#1479#0" expanded="true" />
             <element signature="e#1517#1530#0" expanded="true" />
