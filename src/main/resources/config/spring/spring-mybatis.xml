@@ -9,5 +9,44 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    <!--自动扫描组件，把controller去除，否则会影响事务管理-->
+    <context:component-scan base-package="com">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--加载数据库连接数据-->
+    <context:property-placeholder location="classpath:property/jdbc.properties"/>
 
+    <bean id="dataSource"   class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassLoader" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <!--最大空闲数-->
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <!--最少空闲数-->
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <!--获取连接最大等待时间-->
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:com/mapping/*.xml"/>
+    </bean>
+    <!--MapperScannerConfigurer会扫描指定的类路径下的映射器并自动创建成MapperFactoryBean,
+只有一个接口时，可以直接使用MapperFactoryBean生成代理，如果有多个接口时就是使用MapperScannerConfigurer-->
+    <!--DAO接口所在包名，Spring会自动查找其下的类-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--如果配置了下面的属性，那么扫描器只扫描实现了daoInterface接口的dao-->
+        <!--<property name="markerInterface" value="com.xxx.daoInterface"/>-->
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 </beans>
