@@ -33,8 +33,6 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <columnOverride column="INI" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
-            <columnOverride column="ALERT" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
         </table>
 
 
