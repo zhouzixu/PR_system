@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:config/spring/spring-mybatis.xml"})
 public class Test {
+
     private static Logger logger=Logger.getLogger(Test.class);
 
     @Autowired
@@ -20,6 +21,7 @@ public class Test {
     @org.junit.Test
     public void test(){
         logger.info(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
+        System.out.println(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
     }
 
 }

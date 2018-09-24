@@ -23,7 +23,7 @@
     <context:property-placeholder location="classpath:property/jdbc.properties"/>
 
     <bean id="dataSource"   class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassLoader" value="${jdbc.driver}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
@@ -40,7 +40,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath*:com/mapping/*.xml"/>
-        <property name="configLocation" value="classpath*:config/mybatis/mybatis.xml"/>
+        <property name="configLocation" value="classpath:config/mybatis/mybatis.xml"/>
     </bean>
     <!--MapperScannerConfigurer会扫描指定的类路径下的映射器并自动创建成MapperFactoryBean,
 只有一个接口时，可以直接使用MapperFactoryBean生成代理，如果有多个接口时就是使用MapperScannerConfigurer-->
