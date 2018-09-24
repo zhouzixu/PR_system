@@ -3,7 +3,7 @@
         PUBLIC " -//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry location="classpath:lib/"/>
+    <classPathEntry location="WEB-INF/lib/mysql-connector-java-5.1.30.jar"/>
     <context id="my" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="false"/>
@@ -24,14 +24,11 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--生成mapping接口位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dao"
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.dao"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="task" domainObjectName="Task"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
+        <table tableName="userprofile" domainObjectName="UserProfile"
                selectByExampleQueryId="false"></table>
 
 
