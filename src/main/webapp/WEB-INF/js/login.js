@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type:"post",
-            url:"",
+            url:"/ideatify",
             async:true,
             data: {
                 "username": username,
