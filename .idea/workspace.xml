@@ -7,16 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a559e16-0493-4e9c-98d5-68bb93265b65" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/service/GroupInfoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/service/Impl/GroupInfoServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/ssm.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/ssm.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/PR_system_war_exploded/WEB-INF/classes/com/Units/ReadIniInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/PR_system_war_exploded/WEB-INF/classes/com/Units/ReadIniInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/PR_system_war_exploded/WEB-INF/classes/com/controller/UserLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/PR_system_war_exploded/WEB-INF/classes/com/controller/UserLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/PR_system_war_exploded/WEB-INF/classes/com/test/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/PR_system_war_exploded/WEB-INF/classes/com/test/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Units/ReadIniInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Units/ReadIniInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/UserLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/Test.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -157,8 +149,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="501" />
-    <option name="y" value="11" />
+    <option name="x" value="79" />
+    <option name="y" value="13" />
     <option name="width" value="1754" />
     <option name="height" value="1027" />
   </component>
@@ -626,7 +618,7 @@
       <workItem from="1537598907652" duration="5793000" />
       <workItem from="1537833699629" duration="129000" />
       <workItem from="1537833831880" duration="6404000" />
-      <workItem from="1537840259391" duration="20722000" />
+      <workItem from="1537840259391" duration="21467000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1537599723059</created>
@@ -677,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537860522742</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update">
+      <created>1537867418778</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1537867418778</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -713,11 +712,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33048000" />
+    <option name="totallyTimeSpent" value="33793000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="501" y="11" width="1754" height="1027" extended-state="0" />
-    <editor active="true" />
+    <frame x="79" y="13" width="1754" height="1027" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
