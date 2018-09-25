@@ -47,19 +47,28 @@ public class UserLogin {
         UserProfileWithBLOBs user = userInfoService.getAllInfo(username.toUpperCase());
         GProfileWithBLOBs group=null;
 
+        System.out.println(user.getName());
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(user.getPwd());
         Map map = new HashMap();
 
         if (!password.equals(user.getPwd())){
             map.put("status","fail");
             map.put("info","密碼錯誤");
+            System.out.println(1111);
         }else if (user.getIsexpire().equals("Y")){
             map.put("status","fail");
             map.put("info","賬戶已失效，請聯繫管理員");
+            System.out.println(2222);
         }else if (user.getStatus().equals("N")){
             map.put("status","success");
             //獲取該用戶的所有權限
+            System.out.println(user.getGid());
             group=groupInfoService.getAllInfo(user.getGid());
+            System.out.println(user.getIni());
             Map<String,List<String>> ini = ReadIniInfo.getini(group.getIni());
+            System.out.println(JSON.toJSONString(ini));
             //將該用戶的所有信息和權限存放在session中
             session.setAttribute("isAdmin",user.getIsadmin());
             session.setAttribute("isDepAdmin",user.getIsdepadmin());
@@ -70,8 +79,10 @@ public class UserLogin {
             session.setAttribute("rights",ini);
             session.setAttribute("name",user.getName());
             session.setAttribute("isLogin",true);
+            System.out.println(33333);
         }
         System.out.println(session.getAttribute("name"));
+        System.out.println(5555);
         return map;
     }
 

@@ -27,12 +27,17 @@ public class ReadIniInfo {
             } else if (str.matches("^\\S+=.*$")) {
                 int i = str.indexOf("=");
                 String value = str.substring(i + 1).trim();
-                List<String> values = map.get(currentSection);
-                String[] temps = value.split("//");
-                for (String temp : temps) {
-                    values.add(temp);
+                if (!value.equals("")) {
+                    List<String> values = map.get(currentSection);
+                    String[] temps = value.split("//");
+                    for (String temp : temps) {
+                        values.add(temp);
+                    }
+                    map.put(currentSection, values);
+                }else{
+                    map.put(currentSection,null);
                 }
-                map.put(currentSection, values);
+
             }
         }
         return map;

@@ -27,7 +27,7 @@ public class Test {
     public void test(){
 //        logger.info(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
 //        System.out.println(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
-        String temp=groupInfoService.getAllInfo("ADMIN").getIni();
+        String temp=groupInfoService.getAllInfo("QA部").getIni();
         System.out.println(JSON.toJSONString(ReadIniInfo.getini(temp)));
 //        String[] arrays=temp.split("\r\n");
 //        for (String str:arrays){
