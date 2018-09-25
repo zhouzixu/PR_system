@@ -1,9 +1,8 @@
 package com.test;
 
-import com.alibaba.fastjson.JSON;
-import com.service.Impl.UserInfoService;
+import com.service.UserInfoService;
+import com.service.UserInfoService;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,8 +19,9 @@ public class Test {
 
     @org.junit.Test
     public void test(){
-        logger.info(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
-        System.out.println(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
+//        logger.info(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
+//        System.out.println(JSON.toJSONString(userInfoService.getAllInfo("ADMIN")));
+        System.out.println(userInfoService.getAllInfo("ADMIN").getIni());
     }
 
 }

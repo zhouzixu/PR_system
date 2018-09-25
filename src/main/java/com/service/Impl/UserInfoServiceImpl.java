@@ -2,6 +2,7 @@ package com.service.Impl;
 
 import com.dao.UserProfileMapper;
 import com.model.UserProfileWithBLOBs;
+import com.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

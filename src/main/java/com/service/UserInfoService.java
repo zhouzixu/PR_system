@@ -1,4 +1,4 @@
-package com.service.Impl;
+package com.service;
 
 import com.model.UserProfileWithBLOBs;
 
