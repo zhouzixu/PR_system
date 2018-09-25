@@ -1,14 +1,40 @@
 package com.Units;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+//將ini信息轉換成用map存儲
 public class ReadIniInfo {
 
-    private Map<String,Map<String,String>> map=null;
+    public static Map<String,List<String>> getini(String ini){
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        String currentSection = null;
 
-    private String currentSection=null;
-
-    public void setIni(String ini){
-
+        String[] strings = ini.split("\r\n");
+        for (String str : strings) {
+            str = str.trim();
+            if (str.matches("^\\#.*$")) {
+                return null;
+            } else if (str.matches("^\\[\\S+\\]$")) {
+                String section = str.replaceFirst("^\\[(\\S+)\\]$", "$1");
+                if (!map.containsKey(section)) {
+                    currentSection = section;
+                    List<String> list = new ArrayList<String>();
+                    map.put(section, list);
+                }
+            } else if (str.matches("^\\S+=.*$")) {
+                int i = str.indexOf("=");
+                String value = str.substring(i + 1).trim();
+                List<String> values = map.get(currentSection);
+                String[] temps = value.split("//");
+                for (String temp : temps) {
+                    values.add(temp);
+                }
+                map.put(currentSection, values);
+            }
+        }
+        return map;
     }
 }
