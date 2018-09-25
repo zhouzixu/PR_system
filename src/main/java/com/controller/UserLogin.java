@@ -71,6 +71,7 @@ public class UserLogin {
             session.setAttribute("name",user.getName());
             session.setAttribute("isLogin",true);
         }
+        System.out.println(session.getAttribute("name"));
         return map;
     }
 

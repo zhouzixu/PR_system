@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!--<meta http-equiv="X-UA_Compatible" content="IE=edge">-->
@@ -44,7 +44,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                             <i class="fa fa-user fa-lg"></i>
-                            <span class="hidden-xs">name</span>
+                            <span class="hidden-xs" th:text="${session.name}"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -81,112 +81,112 @@
             </span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-table"></i>
                         <span>要求表</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-edit"></i>
                         <span>要求表批核（经理/主管）</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-times-circle"></i>
                         <span>取消要求表批核</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-rmb"></i>
                         <span>採購報價</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-file-text-o"></i>
                         <span>購貨單資料</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-cubes"></i> <span>收貨入倉</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-hand-lizard-o"></i> <span>提取物品</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-reply-all"></i> <span>退货至仓库</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-th-list"></i> <span>物品资料</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-list-ol"></i> <span>物品类别</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-th"></i> <span>供應商資料</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-credit-card"></i> <span>付款处理</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-reply"></i> <span>退货至供应商</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-paypal"></i> <span>供應商付款</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-suitcase"></i> <span>綜合查詢</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-user-secret"></i> <span>使用者資料</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-file-text"></i> <span>系統基本資料</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-file-o"></i> <span>系統資料</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-list-alt"></i> <span>報表</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-gears"></i> <span>系統資料維護</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
                     <a href="#">
                         <i class="fa fa-cog"></i> <span>管理訊息</span>
                     </a>
