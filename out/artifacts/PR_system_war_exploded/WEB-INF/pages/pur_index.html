@@ -73,16 +73,15 @@
     </header>
     <aside class="main-sidebar">
         <section class="sidebar">
-            <ul class="sidebar-menu" data-widget="tree">
+            <ul class="sidebar-menu" >
                 <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-home"></i> <span>首頁</span>
-                        <span class="pull-right-container">
-            </span>
+                        <span class="pull-right-container"></span>
                     </a>
                 </li>
                 <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
-                    <a href="#">
+                    <a href="/require/header">
                         <i class="fa fa-table"></i>
                         <span>要求表</span>
                     </a>

@@ -2,6 +2,8 @@ package com.test;
 
 import com.Units.ReadIniInfo;
 import com.alibaba.fastjson.JSON;
+import com.dao.UserProfileMapper;
+import com.model.UserProfileWithBLOBs;
 import com.service.GroupInfoService;
 import com.service.UserInfoService;
 import com.service.UserInfoService;
@@ -10,6 +12,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:config/spring/spring-mybatis.xml"})
@@ -22,6 +27,9 @@ public class Test {
 
     @Autowired
     private GroupInfoService groupInfoService;
+
+    @Autowired
+    private UserProfileMapper userProfileMapper;
 
     @org.junit.Test
     public void test(){
@@ -38,6 +46,15 @@ public class Test {
 //                System.out.println(key+","+value);
 //            }
 //        }
+    }
+
+    @org.junit.Test
+    public void test1(){
+        List<UserProfileWithBLOBs> list = userProfileMapper.findAll();
+        for (UserProfileWithBLOBs userProfileWithBLOBs:list){
+            System.out.println(JSON.toJSONString(userProfileWithBLOBs));
+        }
+
     }
 
 }
