@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.Units.JudgeLogin;
 import com.Units.ReadIniInfo;
 import com.model.GProfileWithBLOBs;
 import com.model.UserProfileWithBLOBs;
@@ -75,17 +76,7 @@ public class UserLogin {
 
     @RequestMapping(value = "/index")
     public String index(HttpServletRequest request){
-        HttpSession session=request.getSession();
-        Object flag=session.getAttribute("isLogin");
-        if (flag==null){
-            return "login";
-        }else if (!(boolean)flag){
-            return "login";
-        }else{
-            return "pur_index";
-        }
-
-
+        return JudgeLogin.judge(request,"pur_index","login");
     }
 
 

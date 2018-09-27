@@ -10,8 +10,13 @@ $(function () {
             "url":"/data/require/header", 
             "type":"POST",
             "data":function (data) {
-                
-            }
+                data=JSON.stringify(data);
+                console.info(data);
+                return data;
+            },
+            dataType:"json",
+            processData:false,
+            contentType:'application/json;charset=UTF-8'
         },
         "paging":true,
         "dom": "<'row'<'col-xs-2'l><'#mytool.col-xs-5'><'col-xs-5'f>r>" +
@@ -178,5 +183,6 @@ function checkDetail(prno) {
 function delData(prno) {
 
 }
+
 
 

@@ -3,8 +3,8 @@
         PUBLIC " -//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry location="D:/maven-3.5.3/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar"/>
-    <!--<classPathEntry location="E:/MyDocument/maven_jar/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar"/>-->
+    <!--<classPathEntry location="D:/maven-3.5.3/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar"/>-->
+    <classPathEntry location="E:/MyDocument/maven_jar/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar"/>
     <context id="my" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="false"/>
@@ -30,7 +30,7 @@
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="USERPROFILE" domainObjectName="UserProfile"
+        <table tableName="PR01" domainObjectName="Pr01"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

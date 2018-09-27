@@ -498,4 +498,8 @@
       VIEWPRICE = #{viewprice,jdbcType=CHAR}
     where UID = #{uid,jdbcType=CHAR}
   </update>
+
+  <select id="findAll" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select uid,pwd from USERPROFILE
+  </select>
 </mapper>
