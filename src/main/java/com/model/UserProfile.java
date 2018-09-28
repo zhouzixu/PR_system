@@ -2,7 +2,7 @@ package com.model;
 
 import java.util.Date;
 
-public class UserProfile {
+public class UserProfile implements BaseDao{
     private String uid;
 
     private String pwd;

@@ -1,6 +1,6 @@
 package com.model;
 
-public class GProfile {
+public class GProfile implements BaseDao {
     private String gid;
 
     private String access;

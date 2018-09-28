@@ -1,6 +1,6 @@
 package com.model;
 
-public class Pr01Key {
+public class Pr01Key implements BaseDao{
     private String prno;
 
     private String revision;

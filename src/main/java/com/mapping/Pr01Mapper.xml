@@ -269,4 +269,34 @@
     where PRNO = #{prno,jdbcType=VARCHAR}
       and REVISION = #{revision,jdbcType=CHAR}
   </update>
+  <select id="dataTableSelect" parameterType="com.DataEntity.DataTableRequest" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PR01
+    where
+    1=1
+    <if test="search!=null">
+      and( PRNO like concat("%",#{search.value},"%")
+      or REVISION like concat("%",#{search.value},"%")
+      or ISSUE like concat("%",#{search.value},"%")
+      or PROJTYPE like concat("%",#{search.value},"%")
+      or FROMDEP like concat("%",#{search.value},"%")
+      or TODEP like concat("%",#{search.value},"%")
+      or PRSNO like concat("%",#{search.value},"%")
+      or REMARK like concat("%",#{search.value},"%")
+      or PRDATE like concat("%",#{search.value},"%")
+      or ECOMDATE like concat("%",#{search.value},"%")
+      or ACOMDATE like concat("%",#{search.value},"%")
+      or APPROVEDDATE like concat("%",#{search.value},"%")
+      or APPROVED like concat("%",#{search.value},"%")
+      or STATUS like concat("%",#{search.value},"%")
+      or MSGLEVEL like concat("%",#{search.value},"%"))
+    </if>
+    <foreach collection="orders" item="order" open="order by " close=" " separator=",">
+      ${order.realColumn} ${order.dir}
+    </foreach>
+
+  </select>
 </mapper>

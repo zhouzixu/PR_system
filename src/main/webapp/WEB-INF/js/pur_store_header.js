@@ -15,6 +15,7 @@ $(function () {
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">標籤列印</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">列印報表</button>&nbsp&nbsp');
         },
+        "paging": true,
         "columns": [
             {
                 "data": "REPTNO",

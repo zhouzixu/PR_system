@@ -1,27 +1,13 @@
 $(function () {
     var table = $('#example1').DataTable({
         "scrollX": true,
-        "scrollY":"600px",
+        "scrollY": "600px",
         "autoWidth": true,//可以橫向拉動
-        "lengthMenu":[100,1000,10000],
-        "processing":true,
-        "serverSide":true,
-        "ajax":{
-            "url":"/data/require/header", 
-            "type":"POST",
-            "data":function (data) {
-                data=JSON.stringify(data);
-                console.info(data);
-                return data;
-            },
-            dataType:"json",
-            processData:false,
-            contentType:'application/json;charset=UTF-8'
-        },
-        "paging":true,
+        "lengthMenu": [100, 1000, 10000],
+        "processing": true,
         "dom": "<'row'<'col-xs-2'l><'#mytool.col-xs-5'><'col-xs-5'f>r>" +
-            "t" +
-            "<'row'<'col-xs-6'i><'col-xs-6'p>>",
+        "t" +
+        "<'row'<'col-xs-6'i><'col-xs-6'p>>",
         "initComplete": function () {
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">添加</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">導出Excel</button>&nbsp&nbsp');
@@ -30,30 +16,44 @@ $(function () {
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">香港訂單</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">完成要求</button>&nbsp&nbsp')
         },
-        // "data": [{
-        //     "PRNO": "PR00002085",
-        //     "REVISION": "0",
-        //     "ISSUENAME": "SD02552",
-        //     "PROJTYPE": "4",
-        //     "FROMDEP": "香港採購部",
-        //     "TODEP": "供應商開發與管理部",
-        //     "PRSNO": "行政部F-A",
-        //     "REMARK": "123123121e1212w12e12e1e12e1e212e12e1eeee12e12e1e1edfweqeqe1edae",
-        //     "PRDATE": "2010-12-20",
-        //     "ECOMDATE": "2010-12-20",
-        //     "ACOMDATE": "2010-12-20",
-        //     "APPROVEDDATE": "2010-12-20",
-        //     "APPROVED": "KAM2",
-        //     "STATUSMSG": "X",
-        //     "MSGLEVEL": "1"
-        // }],
+        "paging": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/data/require/header",
+            "type": "POST",
+            "data": function (data) {
+                data = JSON.stringify(data);
+                console.info(data);
+                return data;
+            },
+            dataType: "json",
+            processData: false,
+            contentType: 'application/json;charset=UTF-8'
+        },
+        "data": [{
+            "PRNO": "PR00002085",
+            "REVISION": "0",
+            "ISSUENAME": "SD02552",
+            "PROJTYPE": "4",
+            "FROMDEP": "香港採購部",
+            "TODEP": "供應商開發與管理部",
+            "PRSNO": "行政部F-A",
+            "REMARK": "123123121e1212w12e12e1e12e1e212e12e1eeee12e12e1e1edfweqeqe1edae",
+            "PRDATE": "2010-12-20",
+            "ECOMDATE": "2010-12-20",
+            "ACOMDATE": "2010-12-20",
+            "APPROVEDDATE": "2010-12-20",
+            "APPROVED": "KAM2",
+            "STATUSMSG": "X",
+            "MSGLEVEL": "1"
+        }],
         "columns": [
             {
                 "data": "PRNO",
                 "width": "50px",
                 "title": "要求表號",
-                "render":function (data,type,row,meta) {
-                    return '<a href="javascript:void(0);" onclick="transValue(' + "\'" + data + "\'" + ')">'+data+'</a> '
+                "render": function (data, type, row, meta) {
+                    return '<a href="javascript:void(0);" onclick="transValue(' + "\'" + data + "\'" + ')">' + data + '</a> '
                 }
             },
             {
@@ -165,10 +165,10 @@ $(function () {
                 "previous": "上一頁",
                 "next": "下一頁",
                 "last": "尾頁"
-            },
-            //將第一行進行升序，可選擇多行進行排序，在最外中括號中添加即可
-            "order": [[0, "desc"]]
-        }
+            }
+        },
+        //將第一行進行升序，可選擇多行進行排序，在最外中括號中添加即可
+        "order": [[0, "desc"]]
     });
 });
 
