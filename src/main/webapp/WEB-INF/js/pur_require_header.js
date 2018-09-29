@@ -3,8 +3,9 @@ $(function () {
         "scrollX": true,
         "scrollY": "600px",
         "autoWidth": true,//可以橫向拉動
-        "lengthMenu": [100, 1000, 10000],
+        "lengthMenu": [50, 100, 500],
         "processing": true,
+        "paging": true,
         "dom": "<'row'<'col-xs-2'l><'#mytool.col-xs-5'><'col-xs-5'f>r>" +
         "t" +
         "<'row'<'col-xs-6'i><'col-xs-6'p>>",
@@ -16,7 +17,6 @@ $(function () {
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">香港訂單</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">完成要求</button>&nbsp&nbsp')
         },
-        "paging": true,
         "serverSide": true,
         "ajax": {
             "url": "/data/require/header",
@@ -30,23 +30,6 @@ $(function () {
             processData: false,
             contentType: 'application/json;charset=UTF-8'
         },
-        "data": [{
-            "PRNO": "PR00002085",
-            "REVISION": "0",
-            "ISSUENAME": "SD02552",
-            "PROJTYPE": "4",
-            "FROMDEP": "香港採購部",
-            "TODEP": "供應商開發與管理部",
-            "PRSNO": "行政部F-A",
-            "REMARK": "123123121e1212w12e12e1e12e1e212e12e1eeee12e12e1e1edfweqeqe1edae",
-            "PRDATE": "2010-12-20",
-            "ECOMDATE": "2010-12-20",
-            "ACOMDATE": "2010-12-20",
-            "APPROVEDDATE": "2010-12-20",
-            "APPROVED": "KAM2",
-            "STATUSMSG": "X",
-            "MSGLEVEL": "1"
-        }],
         "columns": [
             {
                 "data": "PRNO",
@@ -64,12 +47,23 @@ $(function () {
             {
                 "data": "ISSUENAME",
                 "width": "45px",
+                "orderable": false,
                 "title": "發件者"
             },
             {
                 "data": "PROJTYPE",
-                "width": "60px",
-                "title": "個案類別"
+                "width": "120px",
+                "title": "個案類別",
+                "orderable": false,
+                "render":function (data,type,row,meta) {
+                    if (data){
+                        if (data.length > 11) {
+                            return '<span title="' + data + '">' + data.substr(0, 10) + '...</span>';
+                        } else {
+                            return '<span title="' + data + '">' + data + '</span>';
+                        }
+                    } 
+                }
             },
             {
                 "data": "FROMDEP",
@@ -93,8 +87,8 @@ $(function () {
                 "title": "備註",
                 "render": function (data, type, row, meta) {
                     if (data) {
-                        if (data.length > 13) {
-                            return '<span title="' + data + '">' + data.substr(0, 12) + '...</span>';
+                        if (data.length > 15) {
+                            return '<span title="' + data + '">' + data.substr(0, 14) + '...</span>';
                         } else {
                             return '<span title="' + data + '">' + data + '</span>';
                         }
@@ -124,16 +118,19 @@ $(function () {
             {
                 "data": "APPROVED",
                 "width": "50px",
+                "orderable": false,
                 "title": "批核者"
             },
             {
                 "data": "STATUSMSG",
                 "width": "60px",
+                "orderable": false,
                 "title": "批核狀態"
             },
             {
                 "data": "MSGLEVEL",
                 "width": "90px",
+                "orderable": false,
                 "title": "訊息管理程度"
             },
             {
