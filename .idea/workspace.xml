@@ -8,25 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a559e16-0493-4e9c-98d5-68bb93265b65" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/DataEntity/DataTableResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Units/DateUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/AccessRTF.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/ReadWordUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/TestParseRTF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/PR_system_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/PR_system_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/ssm.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/ssm.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Units/DataTableUnits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Units/DataTableUnits.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Units/JudgeLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Units/JudgeLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Units/ReadIniInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Units/ReadIniInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/DataHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/DataHandling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mapping/UserProfileMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mapping/UserProfileMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/service/Impl/Pr01ServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/service/Impl/Pr01ServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/service/Pr01Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/service/Pr01Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/mybatis/mybatis.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/mybatis/mybatis.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/js/pur_require_header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/js/pur_require_header.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,8 +37,8 @@
       <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/test/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+            <state relative-caret-position="346">
+              <caret line="75" column="39" selection-start-line="75" selection-start-column="39" selection-end-line="75" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,39 +46,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestParseRTF.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/test/TestParseRTF.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="30" column="74" lean-forward="true" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccessRTF.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/test/AccessRTF.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="27" column="84" lean-forward="true" selection-start-line="27" selection-start-column="84" selection-end-line="27" selection-end-column="84" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadWordUtils.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ReadWordUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/test/ReadWordUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
+            <state relative-caret-position="1444">
               <caret line="112" column="5" lean-forward="true" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1260#1289#0" expanded="true" />
-                <element signature="e#2143#2172#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -237,8 +193,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/ReadWordUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/AccessRTF.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/test/Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/TestParseRTF.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/Test.java" />
       </list>
     </option>
   </component>
@@ -782,7 +738,7 @@
       <workItem from="1537920274756" duration="15628000" />
       <workItem from="1538028373535" duration="8996000" />
       <workItem from="1538092149547" duration="38309000" />
-      <workItem from="1538185012210" duration="21103000" />
+      <workItem from="1538185012210" duration="21362000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1537599723059</created>
@@ -882,7 +838,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538138279032</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update">
+      <created>1538211865511</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1538211865511</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -918,13 +881,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118012000" />
+    <option name="totallyTimeSpent" value="118271000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="182" y="5" width="1754" height="1040" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.3292683" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.3224401" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
@@ -933,13 +896,14 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.12557077" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.30155212" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.30155212" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32921347" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18181819" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18181819" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -951,7 +915,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
@@ -1395,18 +1358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/ReadWordUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="112" column="5" lean-forward="true" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1260#1289#0" expanded="true" />
-            <element signature="e#2143#2172#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/AccessRTF.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
@@ -1417,20 +1368,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/TestParseRTF.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+        <state relative-caret-position="486">
+          <caret line="30" column="74" lean-forward="true" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/TestParseRTF.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="74" lean-forward="true" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
+        <state relative-caret-position="346">
+          <caret line="75" column="39" selection-start-line="75" selection-start-column="39" selection-end-line="75" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/ReadWordUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1444">
+          <caret line="112" column="5" lean-forward="true" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
