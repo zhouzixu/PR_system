@@ -70,10 +70,9 @@ public class Test {
 //            System.out.println(JSON.toJSONString(userProfileWithBLOBs));
 //        }
         Pr01Key key = new Pr01Key();
-        key.setPrno("PR00036586");
+        key.setPrno("PR00002085");
         key.setRevision("0");
-        Pr01 pr01 = pr01Mapper.selectByPrimaryKey(key);
-        String text = pr01.getRemark();
+        System.out.println(pr01Mapper.deleteByPrimaryKey(key));
     }
 
 

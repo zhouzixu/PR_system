@@ -242,6 +242,7 @@
       <h1>
         要求表
       </h1>
+      <button type="button" data-toggle="modal" data-target="#myModal" value="test"/>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> 首頁</a></li>
         <li class="active">要求表</li>
@@ -508,9 +509,11 @@
         <form class="form-horizontal" action="#" method="post">
           <div>要求表號：<input type="text" name="prno" id="prno" readonly="readonly"></div><br>
           <div>部門編號：<input type="text" name="prsno" id="prsno"></div><br>
+          <div>版&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp本：<input type="text" name="revsion" id="revision" readonly="readonly"></div>
+          <div>發件者：<input type="text" name=""></div>
           <div>
-            狀況：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <select id="statusMsg" name="statusMsg">
+            狀&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp況：
+            <select id="statusMsg" name="statusMsg" style="width: 170px;">
               <option value="未批核">未批核</option>
               <option value="已批核">已批核</option>
             </select>

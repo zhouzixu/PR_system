@@ -5,6 +5,15 @@ public class Pr01Key implements BaseDao{
 
     private String revision;
 
+    public Pr01Key(){
+
+    }
+
+    public Pr01Key(String prno,String revision){
+        this.prno=prno;
+        this.revision=revision;
+    }
+
     public String getPrno() {
         return prno;
     }

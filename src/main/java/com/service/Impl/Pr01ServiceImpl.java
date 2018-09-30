@@ -23,6 +23,11 @@ public class Pr01ServiceImpl implements Pr01Service {
     @Autowired
     private Pr01Mapper pr01Mapper;
 
+    /**
+     * 对要求表列表页面的数据进行加载
+     * @param dataTableRequest
+     * @return
+     */
     @Override
     public DataTableResponse dtSelect(DataTableRequest dataTableRequest) {
         //得到dataTable的信息
@@ -69,6 +74,18 @@ public class Pr01ServiceImpl implements Pr01Service {
         dtResponse.setRecordsFiltered(pageInfo.getTotal());
         dtResponse.setRecordsTotal(pageInfo.getTotal());
         return dtResponse;
+    }
+
+    /**
+     * 删除prno_header的数据
+     * @param prno
+     * @param revision
+     * @return
+     */
+    @Override
+    public int delData(String prno,String revision) {
+        Pr01Key key = new Pr01Key(prno,revision);
+        return pr01Mapper.deleteByPrimaryKey(key);
     }
 
     @Override

@@ -141,8 +141,8 @@ $(function () {
                 "orderable": false,
                 "render": function (data, type, row, meta) {
                     return '<button class="btn btn-primary btn-sm" onclick="checkDetail(' + "\'" + row.PRNO + "\'" + ')"><i class="fa fa-info"></i>查看</button>' +
-                        '<button class="btn btn-info btn-sm" data-toggle="modal"  data-target="#myModal" onclick="transValue(' + "\'" + row.PRNO + "\'" + ')" ><i class="fa fa-pencil"></i>修改</button>'
-                        + '<button class="btn btn-danger btn-sm" onclick="checkDetail(' + "\'" + row.PRNO + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
+                        '<button class="btn btn-info btn-sm" onclick="updateData(' + "\'" + row.PRNO + "\'" + ')" ><i class="fa fa-pencil"></i>修改</button>'
+                        + '<button class="btn btn-danger btn-sm" onclick="delData(' + "\'" + row.PRNO + "\',"+"\'" + row.REVISION + "\',"+"\'" + "CANCEL" + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
                 }
             }
         ],
@@ -167,19 +167,56 @@ $(function () {
         //將第一行進行升序，可選擇多行進行排序，在最外中括號中添加即可
         "order": [[0, "desc"]]
     });
+
+    $('#save').click(function () {
+        var temp = $('#statusMsg option:selected').text();
+        alert(temp);
+    })
 });
 
-function transValue(object) {
-    alert(object);
+function updateData(object) {
+    $("div#myModal").modal("show");
 }
 
 function checkDetail(prno) {
 
 }
 
-function delData(prno) {
-
+function delData(prno,revision,authority) {
+    $.ajax({
+        type:"post",
+        url:"/delete/require/header",
+        async:true,
+        data:{
+            "num":"01",
+            "authority":authority,
+            "prno":prno,
+            "revision":revision,
+        },
+        dataType:"json",
+        success:function (data) {
+            if (data==="success"){
+                alert("刪除成功！");
+                window.location.reload();
+            }else if (data==="fail") {
+                alert("刪除失敗！");
+            }else if (data==="noAuthority") {
+                alert("沒有權限！");
+            }else{
+                alert("你還沒有登錄，請先登陸")
+                window.location.href="/login";
+            }
+        }
+    })
 }
+
+function operation(prno,authority) {
+    if (authority==="CANCEL"){
+
+    }
+}
+
+
 
 
 

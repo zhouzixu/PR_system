@@ -18,4 +18,15 @@ public class JudgeLogin {
             return successPage;
         }
     }
+
+    public static boolean judge(HttpSession session){
+        Object flag=session.getAttribute("isLogin");
+        if (flag==null){
+            return false;
+        }else if (!(boolean)flag){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

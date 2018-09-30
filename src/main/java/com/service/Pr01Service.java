@@ -9,5 +9,7 @@ import com.model.Pr01Key;
 
 public interface Pr01Service {
     DataTableResponse dtSelect(DataTableRequest dataTableRequest);
+
+    int delData(String prno,String revision);
     Pr01 SelectAll(Pr01Key key);
 }
