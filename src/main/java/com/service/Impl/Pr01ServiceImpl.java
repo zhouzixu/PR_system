@@ -55,9 +55,11 @@ public class Pr01ServiceImpl implements Pr01Service {
             obj.put("ISSUENAME",pr01.getIssue());
             obj.put("PROJTYPE",pr01.getProjtype());
             obj.put("FROMDEP",pr01.getFromdep());
+            obj.put("FROMGROUP",pr01.getFromgroup());
             obj.put("TODEP",pr01.getTodep());
+            obj.put("TOGROUP",pr01.getTogroup());
             obj.put("PRSNO",pr01.getPrsno());
-            obj.put("REMARK",pr01.getRemark());
+            obj.put("REMARK","11111111111111");//pr01.getRemark()
             obj.put("PRDATE",DateUtil.timeStampToDate(pr01.getPrdate()));
             obj.put("ECOMDATE",DateUtil.timeStampToDate(pr01.getEcomdate()));
             obj.put("ACOMDATE",DateUtil.timeStampToDate(pr01.getAcomdate()));
@@ -65,6 +67,7 @@ public class Pr01ServiceImpl implements Pr01Service {
             obj.put("APPROVED",pr01.getApproved());
             obj.put("STATUSMSG",pr01.getStatus());
             obj.put("MSGLEVEL",pr01.getMsglevel());
+            obj.put("HKPR",pr01.getHkpr());
             list.add(obj);
         }
 

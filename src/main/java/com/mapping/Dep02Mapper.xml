@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Dep02Mapper">
+  <resultMap id="BaseResultMap" type="com.model.Dep02">
+    <id column="DEPCODE" jdbcType="CHAR" property="depcode" />
+    <id column="GROUPNAME" jdbcType="CHAR" property="groupname" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.model.Dep02">
+    <result column="EMAIL" jdbcType="LONGVARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DEPCODE, GROUPNAME
+  </sql>
+  <sql id="Blob_Column_List">
+    EMAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.model.Dep02Key" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from DEP02
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+      and GROUPNAME = #{groupname,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.model.Dep02Key">
+    delete from DEP02
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+      and GROUPNAME = #{groupname,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.model.Dep02">
+    insert into DEP02 (DEPCODE, GROUPNAME, EMAIL
+      )
+    values (#{depcode,jdbcType=CHAR}, #{groupname,jdbcType=CHAR}, #{email,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.Dep02">
+    insert into DEP02
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="depcode != null">
+        DEPCODE,
+      </if>
+      <if test="groupname != null">
+        GROUPNAME,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="depcode != null">
+        #{depcode,jdbcType=CHAR},
+      </if>
+      <if test="groupname != null">
+        #{groupname,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Dep02">
+    update DEP02
+    <set>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+      and GROUPNAME = #{groupname,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.Dep02">
+    update DEP02
+    set EMAIL = #{email,jdbcType=LONGVARCHAR}
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+      and GROUPNAME = #{groupname,jdbcType=CHAR}
+  </update>
+  <select id="findAllDepGroup" parameterType="java.lang.String" resultType="java.lang.String">
+    select GROUPNAME from DEP02 where DEPCODE=#{depcode}
+  </select>
+</mapper>

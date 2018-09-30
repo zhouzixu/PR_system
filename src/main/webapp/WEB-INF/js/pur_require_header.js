@@ -68,12 +68,26 @@ $(function () {
             {
                 "data": "FROMDEP",
                 "width": "60px",
-                "title": "發件部門"
+                "title": "發件部門",
+                "orderable":false,
+                "visible":false
+            },
+            {
+                "data":"FROMGROUP",
+                "width":"90px",
+                "title":"發件部門組別",
             },
             {
                 "data": "TODEP",
                 "width": "110px",
                 "title": "收件部門"
+            },
+            {
+                "data":"TOGROUP",
+                "width":"110px",
+                "title":"收件部門組別",
+                "orderable":false,
+                "visible":false
             },
             {
                 "data": "PRSNO",
@@ -134,6 +148,13 @@ $(function () {
                 "title": "訊息管理程度"
             },
             {
+                "data":"HKPR",
+                "width":"45px",
+                "title":"HKPR",
+                "orderable":false,
+                "visible":false
+            },
+            {
                 "data": null,
                 "width": "180px",
                 "title": "操作",
@@ -141,7 +162,7 @@ $(function () {
                 "orderable": false,
                 "render": function (data, type, row, meta) {
                     return '<button class="btn btn-primary btn-sm" onclick="checkDetail(' + "\'" + row.PRNO + "\'" + ')"><i class="fa fa-info"></i>查看</button>' +
-                        '<button class="btn btn-info btn-sm" onclick="updateData(' + "\'" + row.PRNO + "\'" + ')" ><i class="fa fa-pencil"></i>修改</button>'
+                        '<button class="btn btn-info btn-sm" onclick="updateData(' + "\'" + row.PRNO + "\'," +"\'" + row.REVISION + "\'," +"\'" + row.ISSUENAME + "\'," +"\'" + row.PROJTYPE + "\'," +"\'" + row.FROMDEP + "\'," +"\'" + row.TODEP + "\'," +"\'" + row.PRSNO + "\'," +"\'" + row.REMARK + "\'," +"\'" + row.PRDATE + "\'," +"\'" + row.ECOMDATE + "\'," +"\'" + row.ACOMDATE + "\'," +"\'" + row.APPROVEDDATE + "\'," +"\'" + row.APPROVED + "\'," +"\'" + row.STATUSMSG + "\'," + "\'" + row.MSGLEVEL + "\'," +"\'" + row.TOGROUP + "\'"+')" ><i class="fa fa-pencil"></i>修改</button>'
                         + '<button class="btn btn-danger btn-sm" onclick="delData(' + "\'" + row.PRNO + "\',"+"\'" + row.REVISION + "\',"+"\'" + "CANCEL" + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
                 }
             }
@@ -169,13 +190,59 @@ $(function () {
     });
 
     $('#save').click(function () {
-        var temp = $('#statusMsg option:selected').text();
+        // var temp = $('#statusMsg option:selected').text();
+        var temp = $('#approvedDate').val();
         alert(temp);
+    })
+
+    $.ajax({
+        type:"get",
+        url:"/require/header/dep",
+        async:true,
+        dataType:"json",
+        success:function (data) {
+            data.forEach(function (dep) {
+                $('#toDep').append("<option value="+dep+">"+dep+"</option>");
+            })
+
+        }
     })
 });
 
-function updateData(object) {
+function updateData(PRNO,REVISION,ISSUENAME,PROJTYPE,FROMDEP,TODEP,PRSNO,REMARK,PRDATE,ECOMDATE,ACOMDATE,APPROVEDDATE,APPROVED,STATUSMSG,MSGLEVEL,TOGROUP) {
+    $.ajax({
+        type:"post",
+        url:"/require/header/group",
+        async:true,
+        data:{
+            "dep":TODEP,
+        },
+        dataType:"json",
+        success:function (data) {
+            data.forEach(function (group) {
+                console.info(group)
+                $('#toGroup').append("<option value="+group+">"+group+"</option>");
+            })
+            $('#toGroup').val(TOGROUP);
+        }
+    })
     $("div#myModal").modal("show");
+    $('#myModalLabel').text("修改");
+    $('#prno').val(PRNO);
+    $('#prsno').val(PRSNO);
+    $('#revision').val(REVISION);
+    $('#issuename').val(ISSUENAME);
+    $('#prdate').val(PRDATE);
+    $('#statusMsg option:selected').text(STATUSMSG);
+    $('#approved').val(APPROVED);
+    $('#approvedDate').val(APPROVEDDATE);
+    $('#fromdep').val(FROMDEP);
+    $('#toDep').val(TODEP);
+    $('#ecomdate').val(ECOMDATE);
+    $('#acomdate').val(ACOMDATE);
+    $('#msglevel option:selected').text(MSGLEVEL);
+    $('#remark').val(REMARK);
+
 }
 
 function checkDetail(prno) {
@@ -210,11 +277,6 @@ function delData(prno,revision,authority) {
     })
 }
 
-function operation(prno,authority) {
-    if (authority==="CANCEL"){
-
-    }
-}
 
 
 
