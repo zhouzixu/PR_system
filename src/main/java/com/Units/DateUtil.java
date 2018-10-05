@@ -1,5 +1,6 @@
 package com.Units;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,8 +27,8 @@ public class DateUtil {
 
     /**
      * 時間轉為時間戳
-     * @param date
-     * @param format
+     * @param time
+
      * @return
      */
 //    public static String dateToTimeStamp(String date,String format){
@@ -45,4 +46,8 @@ public class DateUtil {
 //        String t = String.valueOf(time);
 //        return t;
 //    }
+    public static Date StringToDate(String time) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.parse(time);
+    }
 }

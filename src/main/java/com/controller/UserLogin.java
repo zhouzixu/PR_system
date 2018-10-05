@@ -70,6 +70,7 @@ public class UserLogin {
             session.setAttribute("rights",ini);
             session.setAttribute("name",user.getName());
             session.setAttribute("isLogin",true);
+            session.setAttribute("depGroup",user.getGroupcode());
         }
         return map;
     }

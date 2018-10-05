@@ -299,4 +299,8 @@
     </foreach>
 
   </select>
+
+  <select id="getLastData" resultType="java.lang.String">
+    select PRNO from PR01 order by PRNO desc limit 1
+  </select>
 </mapper>

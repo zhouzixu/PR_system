@@ -262,26 +262,6 @@
                 <tbody>
 
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>要求表號</th>
-                  <th>版本</th>
-                  <th>發件者</th>
-                  <th>個案類別</th>
-                  <th>發件部門</th>
-                  <th>收件部門</th>
-                  <th>部門編號</th>
-                  <th>備註</th>
-                  <th>建立日期</th>
-                  <th>要求完成日期</th>
-                  <th>實際完成日期</th>
-                  <th>批核日期</th>
-                  <th>批核者</th>
-                  <th>批核狀態</th>
-                  <th>訊息管理程度</th>
-                  <th>操作</th>
-                </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
@@ -506,26 +486,32 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal" action="#" method="post">
+          <input type="hidden" id="operation">
           <div>要求表號：<input type="text" name="prno" id="prno" readonly="readonly"></div><br>
           <div>部門編號：<input type="text" name="prsno" id="prsno"></div><br>
           <div>版&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp本：<input type="text" name="revsion" id="revision" readonly="readonly"></div><br>
-          <div>發&nbsp件&nbsp者&nbsp：&nbsp<input type="text" id="issuename"></div><br>
+          <div>發&nbsp件&nbsp者&nbsp：&nbsp<input type="text" id="issuename" readonly="readonly"></div><br>
           <div>開單日期：<input type="text" id="prdate" readonly="readonly"></div><br>
           <div>
             狀&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp況：
-            <select id="statusMsg" name="statusMsg" style="width: 170px;">
-              <option value="未批核">未批核</option>
-              <option value="已批核">已批核</option>
-            </select>
+            <input type="text" id="statusMsg" readonly="readonly">
           </div><br>
           <div>批&nbsp核&nbsp者&nbsp：&nbsp<input type="text" id="approved" readonly="readonly"></div><br>
           <div>批核日期：<input type="text" name="approvedDate" id="approvedDate" readonly="readonly"></div><br>
           <div>發件部門：<input type="text" id="fromdep" readonly="readonly"></div><br>
+          <div>發件部门組別：<input type="text" id="fromGroup" readonly="readonly"></div><br>
           <div>要求部門：<select id="toDep" style="width: 170px;"></select> </div><br>
-          <div>要求組別：<select id="toGroup" style="width: 170px;"><option value="empty">N/A</option></select></div><br>
+          <div>要求組別組別：<select id="toGroup" style="width: 170px;"><option value="empty">N/A</option></select></div><br>
           <div>要求完成日期：<input type="date" id="ecomdate"></div><br>
           <div>實際完成日期：<input type="text" id="acomdate" readonly="readonly"></div><br>
-          <div>訊息管理程度：<select id="msglevel" style="width: 170px;"></select></div><br>
+          <div>訊息管理程度：<select id="msglevel" style="width: 170px;">
+            <option value="0">基本級別</option>
+            <option value="1">2等級別</option>
+            <option value="2">3等級別</option>
+            <option value="3">最高級別</option>
+            <option value="4">4</option>
+          </select></div><br>
+          <div>檔案類別：<select id="projtype" style="width: 170px"></select></div><br>
           <div>備&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp註：</div>
           <div><textarea rows="5" id="remark" style="width: 100%"></textarea></div>
         </form>

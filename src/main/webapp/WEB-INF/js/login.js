@@ -48,8 +48,9 @@ function submit() {
             if (data.status==="success") {
                 window.location.href = "/index"
             }else{
-                alert(data.info)
+                alert("密碼錯誤!");
                 history.back();
+                $('#password').val('');
             }
         },
         error:function (data) {

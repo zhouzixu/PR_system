@@ -10,7 +10,7 @@ $(function () {
         "t" +
         "<'row'<'col-xs-6'i><'col-xs-6'p>>",
         "initComplete": function () {
-            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">添加</button>&nbsp&nbsp');
+            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" onclick="add()">添加</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">導出Excel</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">橫版列印</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">豎版列印</button>&nbsp&nbsp');
@@ -69,8 +69,8 @@ $(function () {
                 "data": "FROMDEP",
                 "width": "60px",
                 "title": "發件部門",
-                "orderable":false,
-                "visible":false
+                "orderable":false
+                // "visible":false
             },
             {
                 "data":"FROMGROUP",
@@ -163,7 +163,7 @@ $(function () {
                 "render": function (data, type, row, meta) {
                     return '<button class="btn btn-primary btn-sm" onclick="checkDetail(' + "\'" + row.PRNO + "\'" + ')"><i class="fa fa-info"></i>查看</button>' +
                         '<button class="btn btn-info btn-sm" onclick="updateData(' + "\'" + row.PRNO + "\'," +"\'" + row.REVISION + "\'," +"\'" + row.ISSUENAME + "\'," +"\'" + row.PROJTYPE + "\'," +"\'" + row.FROMDEP + "\'," +"\'" + row.TODEP + "\'," +"\'" + row.PRSNO + "\'," +"\'" + row.REMARK + "\'," +"\'" + row.PRDATE + "\'," +"\'" + row.ECOMDATE + "\'," +"\'" + row.ACOMDATE + "\'," +"\'" + row.APPROVEDDATE + "\'," +"\'" + row.APPROVED + "\'," +"\'" + row.STATUSMSG + "\'," + "\'" + row.MSGLEVEL + "\'," +"\'" + row.TOGROUP + "\'"+')" ><i class="fa fa-pencil"></i>修改</button>'
-                        + '<button class="btn btn-danger btn-sm" onclick="delData(' + "\'" + row.PRNO + "\',"+"\'" + row.REVISION + "\',"+"\'" + "CANCEL" + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
+                        + '<button class="btn btn-danger btn-sm" onclick="delData(' + "\'" + row.PRNO + "\',"+"\'" + row.REVISION + "\',"+"\'" + "DELETE" + "\'," + "\'" + row.ISSUENAME + "\',"+"\'" + row.STATUSMSG + "\',"+"\'" + row.FROMDEP + "\'"+')"><i class="fa fa-trash-o"></i>刪除</button>';
                 }
             }
         ],
@@ -189,10 +189,79 @@ $(function () {
         "order": [[0, "desc"]]
     });
 
+    $('#toDep').change(function () {
+        var togroup = $('#toDep option:selected').val();
+        getGroup(togroup);
+    })
+
     $('#save').click(function () {
-        // var temp = $('#statusMsg option:selected').text();
-        var temp = $('#approvedDate').val();
-        alert(temp);
+        var prno = $('#prno').val();
+        var revision = $('#revision').val();
+        var prsno = $('#prsno').val();
+        var issuename = $('#issuename').val();
+        var prdate = $('#prdate').val();
+        var statusmsg = $('#statusMsg option:selected').text();
+        var fromDep = $('#fromdep').val();
+        var fromGroup =$('#fromGroup').val();
+        var toDep = $('#toDep option:selected').text();
+        var toGroup = $('#toGroup option:selected').text();
+        var ecomdate = $('#ecomdate').val();
+        var acomdate = $('#acomdate').val();
+        var msglevel = $('#msglevel option:selected').val();
+        var remark = $('#remark').val();
+        var projtype = $('#projtype option:selected').text();
+        var operation =$('#operation').val();
+        if (ecomdate==null||ecomdate==""){
+            alert("請輸入要求完成日期");
+            return;
+        }
+        $.ajax({
+            type:"POST",
+            url:"/require/header/addAndUpdate",
+            async:true,
+            data:{
+                "prno":prno,
+                "revision":revision,
+                "prsno":prsno,
+                "issuename":issuename,
+                "prdate":prdate,
+                "statusmsg":statusmsg,
+                "fromDep":fromDep,
+                "fromGroup":fromGroup,
+                "toDep":toDep,
+                "toGroup":toGroup,
+                "ecomdate":ecomdate,
+                "acomdate":acomdate,
+                "msglevel":msglevel,
+                "remark":remark,
+                "projtype":projtype,
+                "operation":operation,
+            },
+            dataType:"json",
+            success:function (data) {
+                console.info(data.isLogin);
+                if (data.isLogin==="yes") {
+                    if (data.canOperation === "yes") {
+                        if (data.result === "success") {
+                            if (data.operation === "update") {+
+                                alert("更新成功！");
+                            } else {
+                                alert("添加成功！");
+                            }
+                        } else {
+                            alert("操作失敗！");
+                        }
+                    } else {
+                        alert("沒有權限!");
+                    }
+                }else{
+                    alert("連接超時，請重新登錄")
+                    window.location.href="/login";
+                }
+            }
+        })
+        $('#myModal').modal('hide');
+        window.location.reload();
     })
 
     $.ajax({
@@ -207,9 +276,109 @@ $(function () {
 
         }
     })
+
+    $.ajax({
+        type:"post",
+        url:"/require/header/projtype",
+        async:true,
+        dataType:"json",
+        success:function (data) {
+
+            data.forEach(function (projtype) {
+                $('#projtype').append("<option value="+projtype+">"+projtype+"</option>");
+            })
+        }
+    })
 });
 
 function updateData(PRNO,REVISION,ISSUENAME,PROJTYPE,FROMDEP,TODEP,PRSNO,REMARK,PRDATE,ECOMDATE,ACOMDATE,APPROVEDDATE,APPROVED,STATUSMSG,MSGLEVEL,TOGROUP) {
+    getGroup(TODEP);
+    if (TOGROUP==null){
+        $('#toGroup').val("N/A");
+    } else{
+        $('#toGroup').val(TOGROUP);
+    }
+    $("div#myModal").modal("show");
+    $('#myModalLabel').text("修改");
+    $('#prno').val(PRNO);
+    $('#prsno').val(PRSNO);
+    $('#revision').val(REVISION);
+    $('#issuename').val(ISSUENAME);
+    $('#prdate').val(PRDATE);
+    $('#statusMsg option:selected').text(STATUSMSG);
+    $('#approved').val(APPROVED);
+    $('#approvedDate').val(APPROVEDDATE);
+    $('#fromdep').val(FROMDEP);
+    $('#toDep').val(TODEP);
+    $('#ecomdate').val(ECOMDATE);
+    $('#acomdate').val(ACOMDATE);
+    $('#msglevel').val(MSGLEVEL);
+    $('#remark').val(REMARK);
+    $('#projtype').val(PROJTYPE);
+    $('#operation').val("update");
+
+}
+
+
+function delData(prno,revision,authority,issue,status,fromdep) {
+    alert(status);
+    $.ajax({
+        url:"/require/header/delete",
+        async:true,
+        data:{
+            "num":"01",
+            "authority":authority,
+            "prno":prno,
+            "revision":revision,
+            "issue":issue,
+            "status":status,
+            "fromdep":fromdep,
+        },
+        dataType:"json",
+        success:function (data) {
+            if (data==="success"){
+                alert("刪除成功！");
+                window.location.reload();
+            }else if (data==="fail") {
+                alert("刪除失敗！");
+            }else if (data==="noAuthority") {
+                alert("沒有權限！");
+            }else if (data==="noDelete"){
+                alert("這資料已經過數或取消，資料內容不能更改!")
+            } else{
+                alert("你還沒有登錄，請先登陸")
+                window.location.href="/login";
+            }
+        }
+    })
+}
+
+function add() {
+    $('#toGroup').empty();
+    $('#toGroup').append('<option value="N/A">N/A</option>');
+    $("div#myModal").modal("show");
+    $('#myModalLabel').text("添加");
+    $('#operation').val("add");
+    $.ajax({
+        type:"POST",
+        url:"/require/header/addPrnoNumber",
+        async:true,
+        dataType:"json",
+        success:function (data) {
+            $('#prno').val(data.prno);
+            $('#revision').val(data.revision);
+            $('#issuename').val(data.issue);
+            $('#prdate').val(data.prdate);
+            $('#statusMsg').val("待批核");
+            $('#fromdep').val(data.fromdep);
+            $('#fromGroup').val(data.fromgroup);
+        }
+    })
+}
+
+function getGroup(TODEP) {
+    $('#toGroup').empty();
+    $('#toGroup').append('<option value="N/A">N/A</option>')
     $.ajax({
         type:"post",
         url:"/require/header/group",
@@ -226,58 +395,7 @@ function updateData(PRNO,REVISION,ISSUENAME,PROJTYPE,FROMDEP,TODEP,PRSNO,REMARK,
             $('#toGroup').val(TOGROUP);
         }
     })
-    $("div#myModal").modal("show");
-    $('#myModalLabel').text("修改");
-    $('#prno').val(PRNO);
-    $('#prsno').val(PRSNO);
-    $('#revision').val(REVISION);
-    $('#issuename').val(ISSUENAME);
-    $('#prdate').val(PRDATE);
-    $('#statusMsg option:selected').text(STATUSMSG);
-    $('#approved').val(APPROVED);
-    $('#approvedDate').val(APPROVEDDATE);
-    $('#fromdep').val(FROMDEP);
-    $('#toDep').val(TODEP);
-    $('#ecomdate').val(ECOMDATE);
-    $('#acomdate').val(ACOMDATE);
-    $('#msglevel option:selected').text(MSGLEVEL);
-    $('#remark').val(REMARK);
-
 }
-
-function checkDetail(prno) {
-
-}
-
-function delData(prno,revision,authority) {
-    $.ajax({
-        type:"post",
-        url:"/delete/require/header",
-        async:true,
-        data:{
-            "num":"01",
-            "authority":authority,
-            "prno":prno,
-            "revision":revision,
-        },
-        dataType:"json",
-        success:function (data) {
-            if (data==="success"){
-                alert("刪除成功！");
-                window.location.reload();
-            }else if (data==="fail") {
-                alert("刪除失敗！");
-            }else if (data==="noAuthority") {
-                alert("沒有權限！");
-            }else{
-                alert("你還沒有登錄，請先登陸")
-                window.location.href="/login";
-            }
-        }
-    })
-}
-
-
 
 
 

@@ -22,4 +22,6 @@ public interface Pr01Mapper {
     int updateByPrimaryKey(Pr01 record);
 
     List<Pr01> dataTableSelect(DataTableRequest dt);
+
+    String getLastData();
 }

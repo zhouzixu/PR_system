@@ -95,4 +95,29 @@ public class Pr01ServiceImpl implements Pr01Service {
     public Pr01 SelectAll(Pr01Key key) {
         return pr01Mapper.selectByPrimaryKey(key);
     }
+
+    @Override
+    public int updateOfChose(Pr01 pr01) {
+        return pr01Mapper.updateByPrimaryKeySelective(pr01);
+    }
+
+    @Override
+    public int insertOfChose(Pr01 pr01) {
+        return pr01Mapper.insertSelective(pr01);
+    }
+
+    @Override
+    public String getNewPrno() {
+        String temp = pr01Mapper.getLastData();
+        temp = temp.substring(2,temp.length());
+        String str = String.valueOf(Long.valueOf(temp)+1);
+        int len = str.length();
+        for (int i=temp.length();i>len;i--){
+            str = "0"+str;
+        }
+        str = "PR"+str;
+        return str;
+    }
+
+
 }
