@@ -114,21 +114,21 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="treeview active">
+        <li class="treeview">
           <a href="/index">
             <i class="fa fa-home"></i> <span>首頁</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
-        <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+        <li class="treeview active" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
           <a href="#">
             <i class="fa fa-table"></i>
             <span>要求表</span>
           </a>
         </li>
         <li class="treeview" th:style="'display:'+(${session.rights['02']!=null}?'inline':'none')+''">
-          <a href="#">
+          <a href="/require/test">
             <i class="fa fa-edit"></i>
             <span>要求表批核（经理/主管）</span>
           </a>
@@ -243,7 +243,7 @@
         要求表
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> 首頁</a></li>
+        <li><a href="/index"><i class="fa fa-home"></i> 首頁</a></li>
         <li class="active">要求表</li>
       </ol>
     </section>

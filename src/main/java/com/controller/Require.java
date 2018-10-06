@@ -2,6 +2,7 @@ package com.controller;
 
 import com.Units.DateUtil;
 import com.Units.JudgeLogin;
+import com.Units.WordUtils;
 import com.alibaba.fastjson.JSON;
 import com.model.Pr01;
 import com.service.DepGroupService;
@@ -16,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/require")
@@ -75,7 +75,7 @@ public class Require {
         String prsno = request.getParameter("prsno");
         String issuename = request.getParameter("issuename");
         String prdate = request.getParameter("prdate");
-//        String statusmsg = request.getParameter("statusmsg");
+        String statusmsg = request.getParameter("statusmsg");
         String fromdep = request.getParameter("fromDep");
         String fromgroup = request.getParameter("fromGroup");
         String todep = request.getParameter("toDep");
@@ -86,7 +86,9 @@ public class Require {
         String remark = request.getParameter("remark");
         String projtype = request.getParameter("projtype");
         String operation = request.getParameter("operation");
-        System.out.println(ecomdate);
+        String uid = (String)session.getAttribute("uid");
+        String isDepAdmin = (String)session.getAttribute("isDepAdmin");
+        String depCode = (String)session.getAttribute("depCode");
         Pr01 pr01 = new Pr01();
         pr01.setPrno(prno);
         pr01.setRevision(revision);
@@ -100,38 +102,36 @@ public class Require {
         pr01.setMsglevel(msglevel!=""?msglevel:null);
         pr01.setProjtype(projtype!=""?projtype:null);
         pr01.setRemark(remark!=""?remark:null);
-        System.out.println(prno);
-        System.out.println(revision);
-        System.out.println(issuename);
-        System.out.println(fromdep);
-        System.out.println(todep);
-        System.out.println(ecomdate);
-        System.out.println(msglevel);
-        System.out.println(projtype);
-        System.out.println(JSON.toJSONString(pr01));
         if (JudgeLogin.judge(session)) {
             Map<String, List<String>> authority = (Map<String, List<String>>) session.getAttribute("rights");
             List<String> rights = authority.get("01");
             if (operation.equals("update")) {
                 String username = (String) session.getAttribute("uid");
-                if ((rights.contains("ALL") || rights.contains("WRITE"))&&(username.equals("ADMIN")||username.equals(issuename))) {
-                    info.put("operation", "update");
-                    int num = pr01Service.updateOfChose(pr01);
-                    if (num == 1) {
-                        info.put("result", "success");
-                    } else {
-                        info.put("result", "fail");
+                if ((rights.contains("ALL") || rights.contains("WRITE"))) {
+                    if (!statusmsg.equals("N")){
+                        info.put("canOperation","no");
+                    }else if (isDepAdmin.equals("N")&&!uid.equals(issuename)){
+                        info.put("canOperation","no");
+                    }else if (isDepAdmin.equals("Y")&&!fromdep.equals(depCode)){
+                        info.put("canOperation","no");
+                    }else {
+                        info.put("operation", "update");
+                        int num = pr01Service.updateOfChose(pr01);
+                        if (num == 1) {
+                            info.put("result", "success");
+                        } else {
+                            info.put("result", "fail");
+                        }
+                        info.put("canOperation", "yes");
                     }
-                    info.put("canOperation", "yes");
                 } else {
                     info.put("canOperation", "no");
                 }
             } else if (operation.equals("add")) {
                 if (rights.contains("ALL") || rights.contains("ADD")) {
                     info.put("operation", "add");
-                    System.out.println("add111111");
+                    pr01.setPrdate(new Date());
                     int num = pr01Service.insertOfChose(pr01);
-                    System.out.println(22222);
                     if (num == 1) {
                         info.put("result", "success");
                     } else {
@@ -201,5 +201,21 @@ public class Require {
         data.put("fromgroup", (String) session.getAttribute("depGroup"));
         data.put("prdate",DateUtil.timeStampToDate(new Date()));
         return data;
+    }
+
+    @RequestMapping(value = "/test")
+    public void test(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String,Object> dataMap = new HashMap<String,Object>();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for(int i=0;i<15;i++){
+            Map<String,Object> map = new HashMap<String,Object>();
+            map.put("name","zzx");
+            map.put("sex","man");
+            map.put("phone","guangdong");
+            list.add(map);
+        }
+        dataMap.put("info",list);
+        WordUtils wordUtils = new WordUtils();
+        wordUtils.createWord(dataMap,request,response);
     }
 }

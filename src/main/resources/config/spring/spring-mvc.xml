@@ -27,6 +27,7 @@
         <property name="suffix" value=".html"/>
         <property name="templateMode" value="HTML"/>
         <property name="characterEncoding" value="UTF-8"/>
+        <property name="order" value="1"/>
     </bean>
     <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
@@ -62,4 +63,5 @@
         <property name="maxUploadSizePerFile" value="1048576000"/>
         <property name="maxInMemorySize" value="40960"/>
     </bean>
+
 </beans>

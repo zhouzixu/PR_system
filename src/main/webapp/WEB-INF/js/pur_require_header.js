@@ -11,7 +11,6 @@ $(function () {
         "<'row'<'col-xs-6'i><'col-xs-6'p>>",
         "initComplete": function () {
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" onclick="add()">添加</button>&nbsp&nbsp');
-            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">導出Excel</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">橫版列印</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">豎版列印</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">香港訂單</button>&nbsp&nbsp');
@@ -139,7 +138,26 @@ $(function () {
                 "data": "STATUSMSG",
                 "width": "60px",
                 "orderable": false,
-                "title": "批核狀態"
+                "title": "批核狀態",
+                "render":function (data,type,row,meta) {
+                    if (data==="Y"){
+                        return "主管批核";
+                    }else if (data==="X") {
+                        return "經理批核";
+                    }else if (data==="C"){
+                        return "取消批核";
+                    }else if (data==="R"){
+                        return "版本處理";
+                    }else if (data==="N"){
+                        return "未批核";
+                    }else if (data===""){
+                        return "完成要求表";
+                    }else if (data==="E"){
+                        return "要求表已收貨";
+                    }else if (data==="G"){
+                        return "已購貨";
+                    }
+                }
             },
             {
                 "data": "MSGLEVEL",
@@ -200,7 +218,7 @@ $(function () {
         var prsno = $('#prsno').val();
         var issuename = $('#issuename').val();
         var prdate = $('#prdate').val();
-        var statusmsg = $('#statusMsg option:selected').text();
+        var statusmsg = $('#statusMsg').val();
         var fromDep = $('#fromdep').val();
         var fromGroup =$('#fromGroup').val();
         var toDep = $('#toDep option:selected').text();
@@ -305,7 +323,7 @@ function updateData(PRNO,REVISION,ISSUENAME,PROJTYPE,FROMDEP,TODEP,PRSNO,REMARK,
     $('#revision').val(REVISION);
     $('#issuename').val(ISSUENAME);
     $('#prdate').val(PRDATE);
-    $('#statusMsg option:selected').text(STATUSMSG);
+    $('#statusMsg').val(STATUSMSG);
     $('#approved').val(APPROVED);
     $('#approvedDate').val(APPROVEDDATE);
     $('#fromdep').val(FROMDEP);
@@ -316,6 +334,7 @@ function updateData(PRNO,REVISION,ISSUENAME,PROJTYPE,FROMDEP,TODEP,PRSNO,REMARK,
     $('#remark').val(REMARK);
     $('#projtype').val(PROJTYPE);
     $('#operation').val("update");
+
 
 }
 
@@ -356,6 +375,15 @@ function delData(prno,revision,authority,issue,status,fromdep) {
 function add() {
     $('#toGroup').empty();
     $('#toGroup').append('<option value="N/A">N/A</option>');
+    $('#prsno').val("");
+    $('#approved').val("");
+    $('#approvedDate').val("");
+    $('#fromdep').val("");
+    $('#fromGroup').val("");
+    $('#ecomdate').val("");
+    $('#acomdate').val("");
+    $('#msglevel option:selected').val(0);
+    $('#remark').val("");
     $("div#myModal").modal("show");
     $('#myModalLabel').text("添加");
     $('#operation').val("add");
