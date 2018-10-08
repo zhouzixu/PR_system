@@ -49,4 +49,40 @@ public class ReadIniInfo {
         }
         return map;
     }
+
+
+    public static Map<String,List<Map<String,String>>> readIniFile(String ini){
+        Map<String,List<Map<String,String>>> info = new HashMap<>();
+        String currentSection = null;
+        String[] strings = ini.split("\r\n");
+        Map<String,String> temp;
+        for (String str : strings) {
+            str = str.trim();
+            if (str.matches("^\\#.*$")) {
+                return null;
+            } else if (str.matches("^\\[\\S+\\]$")) {
+                String section = str.replaceFirst("^\\[(\\S+)\\]$", "$1");
+                if (!info.containsKey(section)) {
+                    currentSection = section;
+                    List<Map<String,String>> list = new ArrayList<>();
+                    info.put(section, list);
+                }
+            } else if (str.matches("^\\S+=.*$")) {
+                int i = str.indexOf("=");
+                String key = str.substring(0,i);
+                String value = str.substring(i + 1).trim();
+                if (!value.equals("")) {
+                    List<Map<String,String>> values = info.get(currentSection);
+                    temp = new HashMap<String, String>();
+                    temp.put(key,value);
+                    values.add(temp);
+                    info.put(currentSection, values);
+                }else{
+                    info.put(currentSection,null);
+                }
+
+            }
+        }
+        return info;
+    }
 }

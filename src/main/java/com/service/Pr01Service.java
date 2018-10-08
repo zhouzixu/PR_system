@@ -6,6 +6,9 @@ import com.github.pagehelper.PageInfo;
 import com.model.Pr01;
 import com.model.Pr01Key;
 
+import java.util.List;
+import java.util.Map;
+
 
 public interface Pr01Service {
     DataTableResponse dtSelect(DataTableRequest dataTableRequest);
@@ -19,4 +22,6 @@ public interface Pr01Service {
     int insertOfChose(Pr01 pr01);
 
     String getNewPrno();
+    //導入香港訂單
+    int insertHKFile(Map<String,List<Map<String,String>>> iniFile);
 }

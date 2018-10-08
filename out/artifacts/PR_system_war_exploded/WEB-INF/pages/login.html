@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <META http-equiv=Content-Type content="text/html;charset=utf-8">
+    <title>login</title>
+    <script src="../js/jquery.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.md5.js"></script>
+    <script src="../js/login.js"></script>
+    <link rel="stylesheet" href="../css/loginStyle.css">
+
+
+</head>
+<body>
+<div class="container">
+    <div class="form row">
+        <form action="#" class="form-horizontal col-md-offset-2" id="login_form">
+            <h3 class="form-title" style="padding-left: 100px">登錄</h3>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <i class="fa fa-user fa-lg"></i>
+                    <input class="form-control required" type="text" placeholder="用戶名" id="username"
+                           name="username" autofocus="autofocus" maxlength="20"/>
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-lock fa-lg"></i>
+                    <input class="form-control required" type="password" placeholder="密碼" id="password"
+                           name="password" maxlength="16"/>
+                </div>
+                <!--<div class="form-group">-->
+                <!--<label class="checkbox">-->
+                <!--<input type="checkbox" name="remember" value="1"/>记住我-->
+                <!--</label>-->
+                <!--</div>-->
+                <div class="form-group col-md-6">
+                    <br>
+                    <select class="form-control" name="" id="region">
+                        <option>香港</option>
+                        <option selected="selected">顺德</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                </div>
+                <div class="form-group col-md-offset-9">
+                    <button type="button" class="btn btn-success pull-right" name="submit" id="loginBtn">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

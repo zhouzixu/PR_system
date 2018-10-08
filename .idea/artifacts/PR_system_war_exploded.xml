@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="PR_system:war exploded">
-    <output-path>$PROJECT_DIR$/target/PR</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/PR_system_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -62,9 +62,6 @@
           <element id="library" level="project" name="Maven: com.github.virtuald:curvesapi:1.04" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.23" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/PR/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="PR_system/web/Web" />
     </root>

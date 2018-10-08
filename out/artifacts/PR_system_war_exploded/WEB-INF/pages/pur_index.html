@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta http-equiv="X-UA_Compatible" content="IE=edge">-->
+    <title>首页</title>
+    <!--控制頁面的屬性：高度，縮放比例，是否手動縮放-->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
+    <link rel="stylesheet" href="../css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../css/_all-skins.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.slimscroll.min.js"></script>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/adminlte.min.js"></script>
+    <script src="../js/demo.js"></script>
+
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+            <span class="logo-mini">PR</span>
+            <span class="logo-lg">PR系統</span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">切換導航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">4</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <i class="fa fa-user fa-lg"></i>
+                            <span class="hidden-xs" th:text="${session.name}"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-cog fa-lg"></i>
+                                    <span>修改密碼</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user fa-lg"></i>
+                                    <span>個人信息</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span>註銷賬戶</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu" >
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-home"></i> <span>首頁</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+                    <a href="/require/header">
+                        <i class="fa fa-table"></i>
+                        <span>要求表</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['02']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-edit"></i>
+                        <span>要求表批核（经理/主管）</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['15']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-times-circle"></i>
+                        <span>取消要求表批核</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['11']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-rmb"></i>
+                        <span>採購報價</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['03']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>購貨單資料</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['04']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-cubes"></i> <span>收貨入倉</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['12']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-hand-lizard-o"></i> <span>提取物品</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-reply-all"></i> <span>退货至仓库</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['05']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-th-list"></i> <span>物品资料</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['06']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-list-ol"></i> <span>物品类别</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['07']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-th"></i> <span>供應商資料</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['13']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-credit-card"></i> <span>付款处理</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['16']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-reply"></i> <span>退货至供应商</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-paypal"></i> <span>供應商付款</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-suitcase"></i> <span>綜合查詢</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['08']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-user-secret"></i> <span>使用者資料</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['09']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-file-text"></i> <span>系統基本資料</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['10']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-file-o"></i> <span>系統資料</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-list-alt"></i> <span>報表</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-gears"></i> <span>系統資料維護</span>
+                    </a>
+                </li>
+                <li class="treeview" th:style="'display:'+(${session.rights['01']!=null}?'inline':'none')+''">
+                    <a href="#">
+                        <i class="fa fa-cog"></i> <span>管理訊息</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <section class="content-wrapper">
+        <h1 align="center">欢迎来到PR管理系统</h1>
+    </section>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

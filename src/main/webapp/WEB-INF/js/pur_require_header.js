@@ -1,5 +1,6 @@
+var table;
 $(function () {
-    var table = $('#example1').DataTable({
+    table = $('#example1').DataTable({
         "scrollX": true,
         "scrollY": "600px",
         "autoWidth": true,//可以橫向拉動
@@ -13,8 +14,8 @@ $(function () {
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" onclick="add()">添加</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">橫版列印</button>&nbsp&nbsp');
             $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">豎版列印</button>&nbsp&nbsp');
-            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">香港訂單</button>&nbsp&nbsp');
-            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-targ｛｝et="#myModal">完成要求</button>&nbsp&nbsp')
+            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal1">香港訂單</button>&nbsp&nbsp');
+            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" onclick="completeRequire()">完成要求</button>&nbsp&nbsp')
         },
         "serverSide": true,
         "ajax": {
@@ -150,7 +151,7 @@ $(function () {
                         return "版本處理";
                     }else if (data==="N"){
                         return "未批核";
-                    }else if (data===""){
+                    }else if (data==="O"){
                         return "完成要求表";
                     }else if (data==="E"){
                         return "要求表已收貨";
@@ -206,12 +207,22 @@ $(function () {
         //將第一行進行升序，可選擇多行進行排序，在最外中括號中添加即可
         "order": [[0, "desc"]]
     });
+    
+    $('#example1 tbody').on('click','tr',function () {
+        if ($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+        } else{
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
 
     $('#toDep').change(function () {
         var togroup = $('#toDep option:selected').val();
         getGroup(togroup);
     })
 
+    //更新和添加數據
     $('#save').click(function () {
         var prno = $('#prno').val();
         var revision = $('#revision').val();
@@ -257,7 +268,6 @@ $(function () {
             },
             dataType:"json",
             success:function (data) {
-                console.info(data.isLogin);
                 if (data.isLogin==="yes") {
                     if (data.canOperation === "yes") {
                         if (data.result === "success") {
@@ -294,7 +304,7 @@ $(function () {
 
         }
     })
-
+    //項目類型
     $.ajax({
         type:"post",
         url:"/require/header/projtype",
@@ -307,6 +317,29 @@ $(function () {
             })
         }
     })
+
+    // $('#save1').click(function () {
+    //     var file = $('#file').val();
+    //     console.info(file);
+    //     $.ajax({
+    //         type:"POST",
+    //         url:"/require/header/uploadFile",
+    //         enctype:"multipart/form-data",
+    //         data:{
+    //             file:file
+    //         },
+    //         success:function (data) {
+    //             if (data==="success"){
+    //                 alert("文件上傳成功！");
+    //                 $('#myModal1').modal("hide");
+    //                 window.location.reload();
+    //             } else{
+    //                 alert("文件上傳失敗");
+    //             }
+    //         }
+    //     })
+    // })
+
 });
 
 function updateData(PRNO,REVISION,ISSUENAME,PROJTYPE,FROMDEP,TODEP,PRSNO,REMARK,PRDATE,ECOMDATE,ACOMDATE,APPROVEDDATE,APPROVED,STATUSMSG,MSGLEVEL,TOGROUP) {
@@ -426,5 +459,10 @@ function getGroup(TODEP) {
 }
 
 
+//完成要求功能
+function completeRequire() {
+    var data=table.rows(['.selected']).data()[0];
+    console.info(data);
+}
 
 

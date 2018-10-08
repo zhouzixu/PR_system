@@ -2,6 +2,7 @@ package com.controller;
 
 import com.Units.DateUtil;
 import com.Units.JudgeLogin;
+import com.Units.ReadIniInfo;
 import com.Units.WordUtils;
 import com.alibaba.fastjson.JSON;
 import com.model.Pr01;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.*;
 
@@ -203,6 +207,20 @@ public class Require {
         return data;
     }
 
+    @RequestMapping(value = "/header/uploadFile",method = RequestMethod.POST)
+    public String requireFileUpload(@RequestParam("file")CommonsMultipartFile file,HttpServletRequest request)throws Exception,IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()));
+        String line=null;
+        StringBuilder temp = new StringBuilder();
+        while((line=br.readLine())!=null){
+            temp.append(line+"\r\n");
+        }
+        String info = temp.toString();
+        System.out.println(JSON.toJSONString(ReadIniInfo.readIniFile(info)));
+        return "redirect:/require/header";
+    }
+
+    //测试导出word
     @RequestMapping(value = "/test")
     public void test(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String,Object> dataMap = new HashMap<String,Object>();

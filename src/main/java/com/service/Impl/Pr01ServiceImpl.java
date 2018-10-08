@@ -119,5 +119,11 @@ public class Pr01ServiceImpl implements Pr01Service {
         return str;
     }
 
+    @Override
+    public int insertHKFile(Map<String, List<Map<String, String>>> iniFile) {
+
+        return 0;
+    }
+
 
 }

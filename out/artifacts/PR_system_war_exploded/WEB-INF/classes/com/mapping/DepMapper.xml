@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DepMapper">
+  <resultMap id="BaseResultMap" type="com.model.Dep">
+    <id column="DEPCODE" jdbcType="CHAR" property="depcode" />
+    <result column="EMAIL" jdbcType="CHAR" property="email" />
+    <result column="DEPHEAD" jdbcType="CHAR" property="dephead" />
+    <result column="ISPUR" jdbcType="CHAR" property="ispur" />
+    <result column="ISMAN" jdbcType="CHAR" property="isman" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DEPCODE, EMAIL, DEPHEAD, ISPUR, ISMAN
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DEP
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DEP
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.model.Dep">
+    insert into DEP (DEPCODE, EMAIL, DEPHEAD, 
+      ISPUR, ISMAN)
+    values (#{depcode,jdbcType=CHAR}, #{email,jdbcType=CHAR}, #{dephead,jdbcType=CHAR}, 
+      #{ispur,jdbcType=CHAR}, #{isman,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.Dep">
+    insert into DEP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="depcode != null">
+        DEPCODE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="dephead != null">
+        DEPHEAD,
+      </if>
+      <if test="ispur != null">
+        ISPUR,
+      </if>
+      <if test="isman != null">
+        ISMAN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="depcode != null">
+        #{depcode,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=CHAR},
+      </if>
+      <if test="dephead != null">
+        #{dephead,jdbcType=CHAR},
+      </if>
+      <if test="ispur != null">
+        #{ispur,jdbcType=CHAR},
+      </if>
+      <if test="isman != null">
+        #{isman,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Dep">
+    update DEP
+    <set>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=CHAR},
+      </if>
+      <if test="dephead != null">
+        DEPHEAD = #{dephead,jdbcType=CHAR},
+      </if>
+      <if test="ispur != null">
+        ISPUR = #{ispur,jdbcType=CHAR},
+      </if>
+      <if test="isman != null">
+        ISMAN = #{isman,jdbcType=CHAR},
+      </if>
+    </set>
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Dep">
+    update DEP
+    set EMAIL = #{email,jdbcType=CHAR},
+      DEPHEAD = #{dephead,jdbcType=CHAR},
+      ISPUR = #{ispur,jdbcType=CHAR},
+      ISMAN = #{isman,jdbcType=CHAR}
+    where DEPCODE = #{depcode,jdbcType=CHAR}
+  </update>
+
+  <select id="selectAllDepCode" resultType="java.lang.String">
+    select DEPCODE from DEP;
+  </select>
+</mapper>
