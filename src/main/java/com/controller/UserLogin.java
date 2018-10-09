@@ -2,6 +2,7 @@ package com.controller;
 
 import com.Units.JudgeLogin;
 import com.Units.ReadIniInfo;
+import com.alibaba.fastjson.JSON;
 import com.model.GProfileWithBLOBs;
 import com.model.UserProfileWithBLOBs;
 import com.service.GroupInfoService;
@@ -42,9 +43,8 @@ public class UserLogin {
     @ResponseBody
     public Map login(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("region") String region, HttpServletRequest request) {
         HttpSession session = request.getSession();
-
         UserProfileWithBLOBs user = userInfoService.getAllInfo(username.toUpperCase());
-        GProfileWithBLOBs group=null;
+        GProfileWithBLOBs group;
 
 
         Map map = new HashMap();

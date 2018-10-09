@@ -1,17 +1,12 @@
 package com.controller;
 
-import com.Units.DateUtil;
-import com.Units.JudgeLogin;
-import com.Units.ReadIniInfo;
-import com.Units.WordUtils;
+import com.Units.*;
 import com.alibaba.fastjson.JSON;
 import com.model.Pr01;
-import com.service.DepGroupService;
-import com.service.DepService;
-import com.service.Pr01Service;
-import com.service.ProJTypeService;
+import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,9 +38,23 @@ public class Require {
     @Autowired
     private Pr01Service pr01Service;
 
+    @Autowired
+    private Pr02Service pr02Service;
+
     @RequestMapping("/header")
     public String requireHeader(HttpServletRequest request){
         return JudgeLogin.judge(request,"pur_require_header","login");
+    }
+
+    @RequestMapping(value = "/detail")
+    public String requireDetail(HttpServletRequest request, Model model){
+        String prno = request.getParameter("prno");
+        String revision = request.getParameter("revision");
+        System.out.println(prno+" "+revision);
+        String result = JudgeLogin.judge(request,"pur_require_detail","login");
+        model.addAttribute("prno",prno);
+        model.addAttribute("revision",revision);
+        return result;
     }
 
     @RequestMapping(value = "/header/dep")
@@ -207,6 +216,7 @@ public class Require {
         return data;
     }
 
+    //香港訂單導入
     @RequestMapping(value = "/header/uploadFile",method = RequestMethod.POST)
     public String requireFileUpload(@RequestParam("file")CommonsMultipartFile file,HttpServletRequest request)throws Exception,IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()));
@@ -218,6 +228,42 @@ public class Require {
         String info = temp.toString();
         System.out.println(JSON.toJSONString(ReadIniInfo.readIniFile(info)));
         return "redirect:/require/header";
+    }
+
+    @RequestMapping(value = "/header/completeRequire",method = RequestMethod.POST)
+    @ResponseBody
+    public String completeRequire(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String prno = request.getParameter("prno");
+        String revision = request.getParameter("revision");
+        String issue = request.getParameter("issue");
+        String projtype = request.getParameter("projtype");
+        String prsno = request.getParameter("prsno");
+        String uid = (String) session.getAttribute("uid");
+        Date now = new Date();
+        if (issue.equals(uid)){
+            Pr01 pr01 = new Pr01();
+            pr01.setPrno(prno);
+            pr01.setRevision(revision);
+            pr01.setAcomdate(now);
+            pr01.setStatus("O");
+            pr01Service.updateOfChose(pr01);
+            if (pr02Service.getDataNum(prno,revision)!=0){
+                pr02Service.updateOfChose(prno,revision,prsno,projtype,now);
+            }
+            return "success";
+        }else {
+            return "fail";
+        }
+    }
+
+    @RequestMapping(value = "/detail/getData")
+    @ResponseBody
+    public Pr01 require_detail_getData(HttpServletRequest request){
+        String prno = request.getParameter("prno");
+        String revision = request.getParameter("revision");
+        Pr01 pr01 = pr01Service.getDataByPrimaryKey(prno,revision);
+        return pr01;
     }
 
     //测试导出word

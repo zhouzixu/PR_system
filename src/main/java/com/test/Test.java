@@ -1,9 +1,6 @@
 package com.test;
 
-import com.DataEntity.Column;
-import com.DataEntity.DataTableRequest;
-import com.DataEntity.Order;
-import com.DataEntity.Search;
+import com.DataEntity.*;
 import com.Units.DataTableUnits;
 import com.Units.DateUtil;
 import com.Units.ReadIniInfo;
@@ -13,9 +10,7 @@ import com.dao.UserProfileMapper;
 import com.model.Pr01;
 import com.model.Pr01Key;
 import com.model.UserProfileWithBLOBs;
-import com.service.GroupInfoService;
-import com.service.Pr01Service;
-import com.service.UserInfoService;
+import com.service.*;
 import com.service.UserInfoService;
 import org.apache.log4j.Logger;
 import org.junit.runner.RunWith;
@@ -53,12 +48,15 @@ public class Test {
     @Autowired
     private Pr01Service pr01Service;
 
+    @Autowired
+    private Pr02Service pr02Service;
+
     @org.junit.Test
     public void test() throws ParseException {
         Pr01 pr01 = new Pr01();
         pr01.setPrno(pr01Service.getNewPrno());
         pr01.setRevision("0");
-        pr01.setIssue("ADMINISTRATOR");
+        pr01.setIssue("ADMIN");
         pr01.setFromdep("經理部");
         pr01.setTodep("R&D");
         pr01.setTogroup("N/A");
@@ -84,7 +82,24 @@ public class Test {
 
     @org.junit.Test
     public void test2(){
-        System.out.println(new Date());
+
+        DataTableRequest_require_detail dt = new DataTableRequest_require_detail();
+        Order order = new Order();
+        order.setDir("asc");
+        order.setColumn(0);
+        order.setRealColumn("SEQNO");
+        List<Order> list = new ArrayList<>();
+        list.add(order);
+        Search search = new Search();
+        search.setRegex(false);
+        search.setValue("");
+        dt.setDraw(1);
+        dt.setOrders(list);
+        dt.setPrno("PR00036624");
+        dt.setRevision("0");
+        dt.setStart(0);
+        dt.setLength(10);
+//        System.out.println(JSON.toJSONString(pr02Service.dtSelect(dt)));
     }
 
 }

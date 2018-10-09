@@ -125,5 +125,13 @@ public class Pr01ServiceImpl implements Pr01Service {
         return 0;
     }
 
+    @Override
+    public Pr01 getDataByPrimaryKey(String prno, String revision) {
+        Pr01Key pr01 = new Pr01Key();
+        pr01.setPrno(prno);
+        pr01.setRevision(revision);
+        return pr01Mapper.selectByPrimaryKey(pr01);
+    }
+
 
 }

@@ -21,7 +21,11 @@ public interface Pr01Service {
 
     int insertOfChose(Pr01 pr01);
 
+    //用於添加生成一個新的PRNO
     String getNewPrno();
     //導入香港訂單
     int insertHKFile(Map<String,List<Map<String,String>>> iniFile);
+
+    Pr01 getDataByPrimaryKey(String prno,String revision);
+
 }

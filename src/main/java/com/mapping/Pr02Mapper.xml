@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Pr02Mapper">
+  <resultMap id="BaseResultMap" type="com.model.Pr02">
+    <id column="PRNO" jdbcType="VARCHAR" property="prno" />
+    <id column="SEQNO" jdbcType="CHAR" property="seqno" />
+    <id column="REVISION" jdbcType="CHAR" property="revision" />
+    <result column="ITEMNO" jdbcType="VARCHAR" property="itemno" />
+    <result column="DESC1" jdbcType="VARCHAR" property="desc1" />
+    <result column="DESC2" jdbcType="VARCHAR" property="desc2" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="RQTY" jdbcType="DECIMAL" property="rqty" />
+    <result column="AQTY" jdbcType="DECIMAL" property="aqty" />
+    <result column="APPROVED" jdbcType="VARCHAR" property="approved" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="PUROS" jdbcType="DECIMAL" property="puros" />
+    <result column="REPTOS" jdbcType="DECIMAL" property="reptos" />
+    <result column="SUPPNO" jdbcType="CHAR" property="suppno" />
+    <result column="COST" jdbcType="DECIMAL" property="cost" />
+    <result column="APPROVEDDATE" jdbcType="TIMESTAMP" property="approveddate" />
+    <result column="PURDATE" jdbcType="TIMESTAMP" property="purdate" />
+    <result column="REPTDATE" jdbcType="TIMESTAMP" property="reptdate" />
+    <result column="CUR" jdbcType="CHAR" property="cur" />
+    <result column="ITOS" jdbcType="DECIMAL" property="itos" />
+    <result column="MONTHREQ" jdbcType="DECIMAL" property="monthreq" />
+    <result column="COMPANYNO" jdbcType="CHAR" property="companyno" />
+    <result column="TOTAL" jdbcType="DECIMAL" property="total" />
+    <result column="PONO" jdbcType="CHAR" property="pono" />
+    <result column="PRDATE" jdbcType="TIMESTAMP" property="prdate" />
+    <result column="DELIVERDATE" jdbcType="TIMESTAMP" property="deliverdate" />
+    <result column="REBACK" jdbcType="VARCHAR" property="reback" />
+    <result column="PRICESURE" jdbcType="VARCHAR" property="pricesure" />
+    <result column="PAYFOR" jdbcType="DECIMAL" property="payfor" />
+    <result column="PAYED" jdbcType="VARCHAR" property="payed" />
+    <result column="ACNO" jdbcType="VARCHAR" property="acno" />
+    <result column="INVOICE" jdbcType="VARCHAR" property="invoice" />
+    <result column="PAYDATE" jdbcType="DATE" property="paydate" />
+    <result column="PAYHISTOR" jdbcType="DECIMAL" property="payhistor" />
+    <result column="QTY" jdbcType="DECIMAL" property="qty" />
+    <result column="FROMDEP" jdbcType="VARCHAR" property="fromdep" />
+    <result column="ISSUE" jdbcType="VARCHAR" property="issue" />
+    <result column="APTURE" jdbcType="DECIMAL" property="apture" />
+    <result column="APTRUETOO" jdbcType="DECIMAL" property="aptruetoo" />
+    <result column="CAT" jdbcType="CHAR" property="cat" />
+    <result column="PROJTYPE" jdbcType="CHAR" property="projtype" />
+    <result column="ISSUENAME" jdbcType="VARCHAR" property="issuename" />
+    <result column="APNO" jdbcType="VARCHAR" property="apno" />
+    <result column="RETURNTOW" jdbcType="VARCHAR" property="returntow" />
+    <result column="ITNAME" jdbcType="VARCHAR" property="itname" />
+    <result column="ITDATE" jdbcType="TIMESTAMP" property="itdate" />
+    <result column="ITDEP" jdbcType="VARCHAR" property="itdep" />
+    <result column="STAFF" jdbcType="VARCHAR" property="staff" />
+    <result column="PRSNO" jdbcType="VARCHAR" property="prsno" />
+    <result column="SUPPNAME" jdbcType="CHAR" property="suppname" />
+    <result column="ISSUETRUE" jdbcType="CHAR" property="issuetrue" />
+    <result column="USEDINFO1" jdbcType="CHAR" property="usedinfo1" />
+    <result column="USEDINFO2" jdbcType="CHAR" property="usedinfo2" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.model.Pr02WithBLOBs">
+    <result column="REMARK" jdbcType="LONGVARCHAR" property="remark" />
+    <result column="APMARK" jdbcType="LONGVARCHAR" property="apmark" />
+    <result column="ITEMREMARK" jdbcType="LONGVARCHAR" property="itemremark" />
+    <result column="MARKBACK" jdbcType="LONGVARCHAR" property="markback" />
+    <result column="USEDINFO3" jdbcType="LONGVARCHAR" property="usedinfo3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRNO, SEQNO, REVISION, ITEMNO, DESC1, DESC2, UNIT, RQTY, AQTY, APPROVED, STATUS, 
+    PUROS, REPTOS, SUPPNO, COST, APPROVEDDATE, PURDATE, REPTDATE, CUR, ITOS, MONTHREQ, 
+    COMPANYNO, TOTAL, PONO, PRDATE, DELIVERDATE, REBACK, PRICESURE, PAYFOR, PAYED, ACNO, 
+    INVOICE, PAYDATE, PAYHISTOR, QTY, FROMDEP, ISSUE, APTURE, APTRUETOO, CAT, PROJTYPE, 
+    ISSUENAME, APNO, RETURNTOW, ITNAME, ITDATE, ITDEP, STAFF, PRSNO, SUPPNAME, ISSUETRUE, 
+    USEDINFO1, USEDINFO2
+  </sql>
+  <sql id="Blob_Column_List">
+    REMARK, APMARK, ITEMREMARK, MARKBACK, USEDINFO3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.model.Pr02Key" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PR02
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and SEQNO = #{seqno,jdbcType=CHAR}
+      and REVISION = #{revision,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.model.Pr02Key">
+    delete from PR02
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and SEQNO = #{seqno,jdbcType=CHAR}
+      and REVISION = #{revision,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.model.Pr02WithBLOBs">
+    insert into PR02 (PRNO, SEQNO, REVISION, 
+      ITEMNO, DESC1, DESC2, 
+      UNIT, RQTY, AQTY, APPROVED, 
+      STATUS, PUROS, REPTOS, 
+      SUPPNO, COST, APPROVEDDATE, 
+      PURDATE, REPTDATE, CUR, 
+      ITOS, MONTHREQ, COMPANYNO, 
+      TOTAL, PONO, PRDATE, 
+      DELIVERDATE, REBACK, PRICESURE, 
+      PAYFOR, PAYED, ACNO, 
+      INVOICE, PAYDATE, PAYHISTOR, 
+      QTY, FROMDEP, ISSUE, 
+      APTURE, APTRUETOO, CAT, 
+      PROJTYPE, ISSUENAME, APNO, 
+      RETURNTOW, ITNAME, ITDATE, 
+      ITDEP, STAFF, PRSNO, 
+      SUPPNAME, ISSUETRUE, USEDINFO1, 
+      USEDINFO2, REMARK, APMARK, 
+      ITEMREMARK, MARKBACK, USEDINFO3
+      )
+    values (#{prno,jdbcType=VARCHAR}, #{seqno,jdbcType=CHAR}, #{revision,jdbcType=CHAR}, 
+      #{itemno,jdbcType=VARCHAR}, #{desc1,jdbcType=VARCHAR}, #{desc2,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{rqty,jdbcType=DECIMAL}, #{aqty,jdbcType=DECIMAL}, #{approved,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{puros,jdbcType=DECIMAL}, #{reptos,jdbcType=DECIMAL}, 
+      #{suppno,jdbcType=CHAR}, #{cost,jdbcType=DECIMAL}, #{approveddate,jdbcType=TIMESTAMP}, 
+      #{purdate,jdbcType=TIMESTAMP}, #{reptdate,jdbcType=TIMESTAMP}, #{cur,jdbcType=CHAR}, 
+      #{itos,jdbcType=DECIMAL}, #{monthreq,jdbcType=DECIMAL}, #{companyno,jdbcType=CHAR}, 
+      #{total,jdbcType=DECIMAL}, #{pono,jdbcType=CHAR}, #{prdate,jdbcType=TIMESTAMP}, 
+      #{deliverdate,jdbcType=TIMESTAMP}, #{reback,jdbcType=VARCHAR}, #{pricesure,jdbcType=VARCHAR}, 
+      #{payfor,jdbcType=DECIMAL}, #{payed,jdbcType=VARCHAR}, #{acno,jdbcType=VARCHAR}, 
+      #{invoice,jdbcType=VARCHAR}, #{paydate,jdbcType=DATE}, #{payhistor,jdbcType=DECIMAL}, 
+      #{qty,jdbcType=DECIMAL}, #{fromdep,jdbcType=VARCHAR}, #{issue,jdbcType=VARCHAR}, 
+      #{apture,jdbcType=DECIMAL}, #{aptruetoo,jdbcType=DECIMAL}, #{cat,jdbcType=CHAR}, 
+      #{projtype,jdbcType=CHAR}, #{issuename,jdbcType=VARCHAR}, #{apno,jdbcType=VARCHAR}, 
+      #{returntow,jdbcType=VARCHAR}, #{itname,jdbcType=VARCHAR}, #{itdate,jdbcType=TIMESTAMP}, 
+      #{itdep,jdbcType=VARCHAR}, #{staff,jdbcType=VARCHAR}, #{prsno,jdbcType=VARCHAR}, 
+      #{suppname,jdbcType=CHAR}, #{issuetrue,jdbcType=CHAR}, #{usedinfo1,jdbcType=CHAR}, 
+      #{usedinfo2,jdbcType=CHAR}, #{remark,jdbcType=LONGVARCHAR}, #{apmark,jdbcType=LONGVARCHAR}, 
+      #{itemremark,jdbcType=LONGVARCHAR}, #{markback,jdbcType=LONGVARCHAR}, #{usedinfo3,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.Pr02WithBLOBs">
+    insert into PR02
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prno != null">
+        PRNO,
+      </if>
+      <if test="seqno != null">
+        SEQNO,
+      </if>
+      <if test="revision != null">
+        REVISION,
+      </if>
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="desc1 != null">
+        DESC1,
+      </if>
+      <if test="desc2 != null">
+        DESC2,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="rqty != null">
+        RQTY,
+      </if>
+      <if test="aqty != null">
+        AQTY,
+      </if>
+      <if test="approved != null">
+        APPROVED,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="puros != null">
+        PUROS,
+      </if>
+      <if test="reptos != null">
+        REPTOS,
+      </if>
+      <if test="suppno != null">
+        SUPPNO,
+      </if>
+      <if test="cost != null">
+        COST,
+      </if>
+      <if test="approveddate != null">
+        APPROVEDDATE,
+      </if>
+      <if test="purdate != null">
+        PURDATE,
+      </if>
+      <if test="reptdate != null">
+        REPTDATE,
+      </if>
+      <if test="cur != null">
+        CUR,
+      </if>
+      <if test="itos != null">
+        ITOS,
+      </if>
+      <if test="monthreq != null">
+        MONTHREQ,
+      </if>
+      <if test="companyno != null">
+        COMPANYNO,
+      </if>
+      <if test="total != null">
+        TOTAL,
+      </if>
+      <if test="pono != null">
+        PONO,
+      </if>
+      <if test="prdate != null">
+        PRDATE,
+      </if>
+      <if test="deliverdate != null">
+        DELIVERDATE,
+      </if>
+      <if test="reback != null">
+        REBACK,
+      </if>
+      <if test="pricesure != null">
+        PRICESURE,
+      </if>
+      <if test="payfor != null">
+        PAYFOR,
+      </if>
+      <if test="payed != null">
+        PAYED,
+      </if>
+      <if test="acno != null">
+        ACNO,
+      </if>
+      <if test="invoice != null">
+        INVOICE,
+      </if>
+      <if test="paydate != null">
+        PAYDATE,
+      </if>
+      <if test="payhistor != null">
+        PAYHISTOR,
+      </if>
+      <if test="qty != null">
+        QTY,
+      </if>
+      <if test="fromdep != null">
+        FROMDEP,
+      </if>
+      <if test="issue != null">
+        ISSUE,
+      </if>
+      <if test="apture != null">
+        APTURE,
+      </if>
+      <if test="aptruetoo != null">
+        APTRUETOO,
+      </if>
+      <if test="cat != null">
+        CAT,
+      </if>
+      <if test="projtype != null">
+        PROJTYPE,
+      </if>
+      <if test="issuename != null">
+        ISSUENAME,
+      </if>
+      <if test="apno != null">
+        APNO,
+      </if>
+      <if test="returntow != null">
+        RETURNTOW,
+      </if>
+      <if test="itname != null">
+        ITNAME,
+      </if>
+      <if test="itdate != null">
+        ITDATE,
+      </if>
+      <if test="itdep != null">
+        ITDEP,
+      </if>
+      <if test="staff != null">
+        STAFF,
+      </if>
+      <if test="prsno != null">
+        PRSNO,
+      </if>
+      <if test="suppname != null">
+        SUPPNAME,
+      </if>
+      <if test="issuetrue != null">
+        ISSUETRUE,
+      </if>
+      <if test="usedinfo1 != null">
+        USEDINFO1,
+      </if>
+      <if test="usedinfo2 != null">
+        USEDINFO2,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="apmark != null">
+        APMARK,
+      </if>
+      <if test="itemremark != null">
+        ITEMREMARK,
+      </if>
+      <if test="markback != null">
+        MARKBACK,
+      </if>
+      <if test="usedinfo3 != null">
+        USEDINFO3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prno != null">
+        #{prno,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        #{seqno,jdbcType=CHAR},
+      </if>
+      <if test="revision != null">
+        #{revision,jdbcType=CHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=VARCHAR},
+      </if>
+      <if test="desc1 != null">
+        #{desc1,jdbcType=VARCHAR},
+      </if>
+      <if test="desc2 != null">
+        #{desc2,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="rqty != null">
+        #{rqty,jdbcType=DECIMAL},
+      </if>
+      <if test="aqty != null">
+        #{aqty,jdbcType=DECIMAL},
+      </if>
+      <if test="approved != null">
+        #{approved,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="puros != null">
+        #{puros,jdbcType=DECIMAL},
+      </if>
+      <if test="reptos != null">
+        #{reptos,jdbcType=DECIMAL},
+      </if>
+      <if test="suppno != null">
+        #{suppno,jdbcType=CHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="approveddate != null">
+        #{approveddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purdate != null">
+        #{purdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reptdate != null">
+        #{reptdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cur != null">
+        #{cur,jdbcType=CHAR},
+      </if>
+      <if test="itos != null">
+        #{itos,jdbcType=DECIMAL},
+      </if>
+      <if test="monthreq != null">
+        #{monthreq,jdbcType=DECIMAL},
+      </if>
+      <if test="companyno != null">
+        #{companyno,jdbcType=CHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="pono != null">
+        #{pono,jdbcType=CHAR},
+      </if>
+      <if test="prdate != null">
+        #{prdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverdate != null">
+        #{deliverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reback != null">
+        #{reback,jdbcType=VARCHAR},
+      </if>
+      <if test="pricesure != null">
+        #{pricesure,jdbcType=VARCHAR},
+      </if>
+      <if test="payfor != null">
+        #{payfor,jdbcType=DECIMAL},
+      </if>
+      <if test="payed != null">
+        #{payed,jdbcType=VARCHAR},
+      </if>
+      <if test="acno != null">
+        #{acno,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null">
+        #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="paydate != null">
+        #{paydate,jdbcType=DATE},
+      </if>
+      <if test="payhistor != null">
+        #{payhistor,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="fromdep != null">
+        #{fromdep,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null">
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="apture != null">
+        #{apture,jdbcType=DECIMAL},
+      </if>
+      <if test="aptruetoo != null">
+        #{aptruetoo,jdbcType=DECIMAL},
+      </if>
+      <if test="cat != null">
+        #{cat,jdbcType=CHAR},
+      </if>
+      <if test="projtype != null">
+        #{projtype,jdbcType=CHAR},
+      </if>
+      <if test="issuename != null">
+        #{issuename,jdbcType=VARCHAR},
+      </if>
+      <if test="apno != null">
+        #{apno,jdbcType=VARCHAR},
+      </if>
+      <if test="returntow != null">
+        #{returntow,jdbcType=VARCHAR},
+      </if>
+      <if test="itname != null">
+        #{itname,jdbcType=VARCHAR},
+      </if>
+      <if test="itdate != null">
+        #{itdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itdep != null">
+        #{itdep,jdbcType=VARCHAR},
+      </if>
+      <if test="staff != null">
+        #{staff,jdbcType=VARCHAR},
+      </if>
+      <if test="prsno != null">
+        #{prsno,jdbcType=VARCHAR},
+      </if>
+      <if test="suppname != null">
+        #{suppname,jdbcType=CHAR},
+      </if>
+      <if test="issuetrue != null">
+        #{issuetrue,jdbcType=CHAR},
+      </if>
+      <if test="usedinfo1 != null">
+        #{usedinfo1,jdbcType=CHAR},
+      </if>
+      <if test="usedinfo2 != null">
+        #{usedinfo2,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="apmark != null">
+        #{apmark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="itemremark != null">
+        #{itemremark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="markback != null">
+        #{markback,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usedinfo3 != null">
+        #{usedinfo3,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Pr02WithBLOBs">
+    update PR02
+    <set>
+      <if test="itemno != null">
+        ITEMNO = #{itemno,jdbcType=VARCHAR},
+      </if>
+      <if test="desc1 != null">
+        DESC1 = #{desc1,jdbcType=VARCHAR},
+      </if>
+      <if test="desc2 != null">
+        DESC2 = #{desc2,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="rqty != null">
+        RQTY = #{rqty,jdbcType=DECIMAL},
+      </if>
+      <if test="aqty != null">
+        AQTY = #{aqty,jdbcType=DECIMAL},
+      </if>
+      <if test="approved != null">
+        APPROVED = #{approved,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="puros != null">
+        PUROS = #{puros,jdbcType=DECIMAL},
+      </if>
+      <if test="reptos != null">
+        REPTOS = #{reptos,jdbcType=DECIMAL},
+      </if>
+      <if test="suppno != null">
+        SUPPNO = #{suppno,jdbcType=CHAR},
+      </if>
+      <if test="cost != null">
+        COST = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="approveddate != null">
+        APPROVEDDATE = #{approveddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purdate != null">
+        PURDATE = #{purdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reptdate != null">
+        REPTDATE = #{reptdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cur != null">
+        CUR = #{cur,jdbcType=CHAR},
+      </if>
+      <if test="itos != null">
+        ITOS = #{itos,jdbcType=DECIMAL},
+      </if>
+      <if test="monthreq != null">
+        MONTHREQ = #{monthreq,jdbcType=DECIMAL},
+      </if>
+      <if test="companyno != null">
+        COMPANYNO = #{companyno,jdbcType=CHAR},
+      </if>
+      <if test="total != null">
+        TOTAL = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="pono != null">
+        PONO = #{pono,jdbcType=CHAR},
+      </if>
+      <if test="prdate != null">
+        PRDATE = #{prdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverdate != null">
+        DELIVERDATE = #{deliverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reback != null">
+        REBACK = #{reback,jdbcType=VARCHAR},
+      </if>
+      <if test="pricesure != null">
+        PRICESURE = #{pricesure,jdbcType=VARCHAR},
+      </if>
+      <if test="payfor != null">
+        PAYFOR = #{payfor,jdbcType=DECIMAL},
+      </if>
+      <if test="payed != null">
+        PAYED = #{payed,jdbcType=VARCHAR},
+      </if>
+      <if test="acno != null">
+        ACNO = #{acno,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null">
+        INVOICE = #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="paydate != null">
+        PAYDATE = #{paydate,jdbcType=DATE},
+      </if>
+      <if test="payhistor != null">
+        PAYHISTOR = #{payhistor,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null">
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="fromdep != null">
+        FROMDEP = #{fromdep,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null">
+        ISSUE = #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="apture != null">
+        APTURE = #{apture,jdbcType=DECIMAL},
+      </if>
+      <if test="aptruetoo != null">
+        APTRUETOO = #{aptruetoo,jdbcType=DECIMAL},
+      </if>
+      <if test="cat != null">
+        CAT = #{cat,jdbcType=CHAR},
+      </if>
+      <if test="projtype != null">
+        PROJTYPE = #{projtype,jdbcType=CHAR},
+      </if>
+      <if test="issuename != null">
+        ISSUENAME = #{issuename,jdbcType=VARCHAR},
+      </if>
+      <if test="apno != null">
+        APNO = #{apno,jdbcType=VARCHAR},
+      </if>
+      <if test="returntow != null">
+        RETURNTOW = #{returntow,jdbcType=VARCHAR},
+      </if>
+      <if test="itname != null">
+        ITNAME = #{itname,jdbcType=VARCHAR},
+      </if>
+      <if test="itdate != null">
+        ITDATE = #{itdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itdep != null">
+        ITDEP = #{itdep,jdbcType=VARCHAR},
+      </if>
+      <if test="staff != null">
+        STAFF = #{staff,jdbcType=VARCHAR},
+      </if>
+      <if test="prsno != null">
+        PRSNO = #{prsno,jdbcType=VARCHAR},
+      </if>
+      <if test="suppname != null">
+        SUPPNAME = #{suppname,jdbcType=CHAR},
+      </if>
+      <if test="issuetrue != null">
+        ISSUETRUE = #{issuetrue,jdbcType=CHAR},
+      </if>
+      <if test="usedinfo1 != null">
+        USEDINFO1 = #{usedinfo1,jdbcType=CHAR},
+      </if>
+      <if test="usedinfo2 != null">
+        USEDINFO2 = #{usedinfo2,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="apmark != null">
+        APMARK = #{apmark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="itemremark != null">
+        ITEMREMARK = #{itemremark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="markback != null">
+        MARKBACK = #{markback,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usedinfo3 != null">
+        USEDINFO3 = #{usedinfo3,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and REVISION = #{revision,jdbcType=CHAR}
+    <if test="SEQNO!=null">
+      and SEQNO = #{seqno,jdbcType=CHAR}
+    </if>
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.Pr02WithBLOBs">
+    update PR02
+    set ITEMNO = #{itemno,jdbcType=VARCHAR},
+      DESC1 = #{desc1,jdbcType=VARCHAR},
+      DESC2 = #{desc2,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      RQTY = #{rqty,jdbcType=DECIMAL},
+      AQTY = #{aqty,jdbcType=DECIMAL},
+      APPROVED = #{approved,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      PUROS = #{puros,jdbcType=DECIMAL},
+      REPTOS = #{reptos,jdbcType=DECIMAL},
+      SUPPNO = #{suppno,jdbcType=CHAR},
+      COST = #{cost,jdbcType=DECIMAL},
+      APPROVEDDATE = #{approveddate,jdbcType=TIMESTAMP},
+      PURDATE = #{purdate,jdbcType=TIMESTAMP},
+      REPTDATE = #{reptdate,jdbcType=TIMESTAMP},
+      CUR = #{cur,jdbcType=CHAR},
+      ITOS = #{itos,jdbcType=DECIMAL},
+      MONTHREQ = #{monthreq,jdbcType=DECIMAL},
+      COMPANYNO = #{companyno,jdbcType=CHAR},
+      TOTAL = #{total,jdbcType=DECIMAL},
+      PONO = #{pono,jdbcType=CHAR},
+      PRDATE = #{prdate,jdbcType=TIMESTAMP},
+      DELIVERDATE = #{deliverdate,jdbcType=TIMESTAMP},
+      REBACK = #{reback,jdbcType=VARCHAR},
+      PRICESURE = #{pricesure,jdbcType=VARCHAR},
+      PAYFOR = #{payfor,jdbcType=DECIMAL},
+      PAYED = #{payed,jdbcType=VARCHAR},
+      ACNO = #{acno,jdbcType=VARCHAR},
+      INVOICE = #{invoice,jdbcType=VARCHAR},
+      PAYDATE = #{paydate,jdbcType=DATE},
+      PAYHISTOR = #{payhistor,jdbcType=DECIMAL},
+      QTY = #{qty,jdbcType=DECIMAL},
+      FROMDEP = #{fromdep,jdbcType=VARCHAR},
+      ISSUE = #{issue,jdbcType=VARCHAR},
+      APTURE = #{apture,jdbcType=DECIMAL},
+      APTRUETOO = #{aptruetoo,jdbcType=DECIMAL},
+      CAT = #{cat,jdbcType=CHAR},
+      PROJTYPE = #{projtype,jdbcType=CHAR},
+      ISSUENAME = #{issuename,jdbcType=VARCHAR},
+      APNO = #{apno,jdbcType=VARCHAR},
+      RETURNTOW = #{returntow,jdbcType=VARCHAR},
+      ITNAME = #{itname,jdbcType=VARCHAR},
+      ITDATE = #{itdate,jdbcType=TIMESTAMP},
+      ITDEP = #{itdep,jdbcType=VARCHAR},
+      STAFF = #{staff,jdbcType=VARCHAR},
+      PRSNO = #{prsno,jdbcType=VARCHAR},
+      SUPPNAME = #{suppname,jdbcType=CHAR},
+      ISSUETRUE = #{issuetrue,jdbcType=CHAR},
+      USEDINFO1 = #{usedinfo1,jdbcType=CHAR},
+      USEDINFO2 = #{usedinfo2,jdbcType=CHAR},
+      REMARK = #{remark,jdbcType=LONGVARCHAR},
+      APMARK = #{apmark,jdbcType=LONGVARCHAR},
+      ITEMREMARK = #{itemremark,jdbcType=LONGVARCHAR},
+      MARKBACK = #{markback,jdbcType=LONGVARCHAR},
+      USEDINFO3 = #{usedinfo3,jdbcType=LONGVARCHAR}
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and REVISION = #{revision,jdbcType=CHAR}
+      <if test="SEQNO!=null">
+        and SEQNO = #{seqno,jdbcType=CHAR}
+      </if>
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Pr02">
+    update PR02
+    set ITEMNO = #{itemno,jdbcType=VARCHAR},
+      DESC1 = #{desc1,jdbcType=VARCHAR},
+      DESC2 = #{desc2,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      RQTY = #{rqty,jdbcType=DECIMAL},
+      AQTY = #{aqty,jdbcType=DECIMAL},
+      APPROVED = #{approved,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      PUROS = #{puros,jdbcType=DECIMAL},
+      REPTOS = #{reptos,jdbcType=DECIMAL},
+      SUPPNO = #{suppno,jdbcType=CHAR},
+      COST = #{cost,jdbcType=DECIMAL},
+      APPROVEDDATE = #{approveddate,jdbcType=TIMESTAMP},
+      PURDATE = #{purdate,jdbcType=TIMESTAMP},
+      REPTDATE = #{reptdate,jdbcType=TIMESTAMP},
+      CUR = #{cur,jdbcType=CHAR},
+      ITOS = #{itos,jdbcType=DECIMAL},
+      MONTHREQ = #{monthreq,jdbcType=DECIMAL},
+      COMPANYNO = #{companyno,jdbcType=CHAR},
+      TOTAL = #{total,jdbcType=DECIMAL},
+      PONO = #{pono,jdbcType=CHAR},
+      PRDATE = #{prdate,jdbcType=TIMESTAMP},
+      DELIVERDATE = #{deliverdate,jdbcType=TIMESTAMP},
+      REBACK = #{reback,jdbcType=VARCHAR},
+      PRICESURE = #{pricesure,jdbcType=VARCHAR},
+      PAYFOR = #{payfor,jdbcType=DECIMAL},
+      PAYED = #{payed,jdbcType=VARCHAR},
+      ACNO = #{acno,jdbcType=VARCHAR},
+      INVOICE = #{invoice,jdbcType=VARCHAR},
+      PAYDATE = #{paydate,jdbcType=DATE},
+      PAYHISTOR = #{payhistor,jdbcType=DECIMAL},
+      QTY = #{qty,jdbcType=DECIMAL},
+      FROMDEP = #{fromdep,jdbcType=VARCHAR},
+      ISSUE = #{issue,jdbcType=VARCHAR},
+      APTURE = #{apture,jdbcType=DECIMAL},
+      APTRUETOO = #{aptruetoo,jdbcType=DECIMAL},
+      CAT = #{cat,jdbcType=CHAR},
+      PROJTYPE = #{projtype,jdbcType=CHAR},
+      ISSUENAME = #{issuename,jdbcType=VARCHAR},
+      APNO = #{apno,jdbcType=VARCHAR},
+      RETURNTOW = #{returntow,jdbcType=VARCHAR},
+      ITNAME = #{itname,jdbcType=VARCHAR},
+      ITDATE = #{itdate,jdbcType=TIMESTAMP},
+      ITDEP = #{itdep,jdbcType=VARCHAR},
+      STAFF = #{staff,jdbcType=VARCHAR},
+      PRSNO = #{prsno,jdbcType=VARCHAR},
+      SUPPNAME = #{suppname,jdbcType=CHAR},
+      ISSUETRUE = #{issuetrue,jdbcType=CHAR},
+      USEDINFO1 = #{usedinfo1,jdbcType=CHAR},
+      USEDINFO2 = #{usedinfo2,jdbcType=CHAR}
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and REVISION = #{revision,jdbcType=CHAR}
+    <if test="SEQNO!=null">
+      and SEQNO = #{seqno,jdbcType=CHAR}
+    </if>
+  </update>
+
+  <select id="getDataNum" parameterType="com.model.Pr02" resultType="java.lang.Integer">
+    select count(*) from PR02 where PRNO = #{prno} and REVISION = #{revision}
+  </select>
+
+  <select id="dataTableSelect" parameterType="com.DataEntity.DataTableRequest_require_detail" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PR02
+    where
+    1=1
+    and PRNO=#{prno}and revision=#{revision}
+    <!--<if test="search!=null">-->
+      <!--and(PRNO like concat("%",#{search.value},"%")-->
+      <!--or SEQNO like concat("%",#{search.value},"%")-->
+      <!--or ITEMNO like concat("%",#{search.value},"%")-->
+      <!--or DESC1 like concat("%",#{search.value},"%")-->
+      <!--or DESC2 like concat("%",#{search.value},"%")-->
+      <!--or UNIT like concat("%",#{search.value},"%")-->
+      <!--or RQTY like concat("%",#{search.value},"%")-->
+      <!--or AQTY like concat("%",#{search.value},"%")-->
+      <!--or APPROVED like concat("%",#{search.value},"%")-->
+      <!--or STATUS like concat("%",#{search.value},"%")-->
+      <!--or SUPPNO like concat("%",#{search.value},"%")-->
+      <!--or APPROVEDDATE like concat("%",#{search.value},"%")-->
+      <!--or PURDATE like concat("%",#{search.value},"%")-->
+      <!--or CUR like concat("%",#{search.value},"%")-->
+      <!--or REBACK like concat("%",#{search.value},"%")-->
+      <!--or ACNO like concat("%",#{search.value},"%")-->
+      <!--or FROMDEP like concat("%",#{search.value},"%")-->
+      <!--or CAT like concat("%",#{search.value},"%")-->
+      <!--or PROJTYPE like concat("%",#{search.value},"%")-->
+      <!--or ISSUENAME like concat("%",#{search.value},"%")-->
+      <!--or IEDEP like concat("%",#{search.value},"%")-->
+      <!--or SUPPNAME like concat("%",#{search.value},"%")-->
+      <!--)-->
+    <!--</if>-->
+    <!--<foreach collection="orders" item="order" open="order by" close=" " separator=",">-->
+      <!--${order.realColumn} ${order.dir}-->
+    <!--</foreach>-->
+  </select>
+</mapper>
