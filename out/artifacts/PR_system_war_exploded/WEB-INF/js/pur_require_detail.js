@@ -9,17 +9,13 @@ $(function () {
         "dom": "<'row'<'#mytool.col-xs-2'>r>" +
         "t" +
         "<'row'<'col-xs-6'i><'col-xs-6'p>>",
-        "initComplete": function (settings,data) {
-            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">添加</button>');
-            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">導出Excel</button>');
-            if ($.inArray("ALL",data.data[0].AUTH)==-1&&$.inArray("VIEWPRICE",data.data[0].AUTH)==-1){
-                console.info($.inArray("ALL",data.data[0].AUTH))
-                console.info($.inArray("VIEWPRICE",data.data[0].AUTH))
+        "initComplete": function (settings, data) {
+            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" onclick="add()">添加</button>');
+            if ($.inArray("ALL", data.data[0].AUTH) == -1 && $.inArray("VIEWPRICE", data.data[0].AUTH) == -1) {
                 table1.column(15).visible(false);
                 table1.column(13).visible(false);
             }
-            if($.inArray("ALL",data.data[0].AUTH)==-1&&$.inArray("VIEWPAYMENT",data.data[0].AUTH==-1)){
-                console.info($.inArray("VIEWPAYMENT",data.data[0].AUTH))
+            if ($.inArray("ALL", data.data[0].AUTH) == -1 && $.inArray("VIEWPAYMENT", data.data[0].AUTH == -1)) {
                 table1.column(30).visible(false);
                 table1.column(31).visible(false);
                 table1.column(32).visible(false);
@@ -162,7 +158,7 @@ $(function () {
                 "title": "單位"
             },
             {
-                "data": "ISSUETRUE",
+                "data": "ISSUENAME",
                 "width": "70px",
                 "sDefaultContent": "",
                 "title": "實際開表人"
@@ -222,7 +218,7 @@ $(function () {
                 "data": "SUPPNO",
                 "width": "100px",
                 "sDefaultContent": "",
-                "sClass":"suppno",
+                "sClass": "suppno",
                 "title": "指定供應商"
             },
             {
@@ -235,7 +231,7 @@ $(function () {
                 "data": "COST",
                 "width": "60px",
                 "sDefaultContent": "",
-                "sClass":"cost",
+                "sClass": "cost",
                 "title": "單價"
             },
             {
@@ -341,28 +337,28 @@ $(function () {
                 "title": "已提取數量"
             },
             {
-                "data":"ACNO",
-                "width":"60px",
+                "data": "ACNO",
+                "width": "60px",
                 "sDefaultContent": "",
-                "title":"憑證號"
+                "title": "憑證號"
             },
             {
-                "data":"INVOICE",
-                "width":"60px",
+                "data": "INVOICE",
+                "width": "60px",
                 "sDefaultContent": "",
-                "title":"發票號"
+                "title": "發票號"
             },
             {
-                "data":"PAYFOR",
-                "width":"75px",
+                "data": "PAYFOR",
+                "width": "75px",
                 "sDefaultContent": "",
-                "title":"未付款數量"
+                "title": "未付款數量"
             },
             {
-                "data":"PAYDATE",
-                "width":"60px",
+                "data": "PAYDATE",
+                "width": "60px",
                 "sDefaultContent": "",
-                "title":"付款日期"
+                "title": "付款日期"
             },
             {
                 "data": "PROJTYPE",
@@ -381,9 +377,9 @@ $(function () {
             },
             {
                 "data": "PRICESURE",
-                "width":"60px",
+                "width": "60px",
                 "sDefaultContent": "",
-                "visible":false
+                "visible": false
             },
             {
                 "data": null,
@@ -596,13 +592,106 @@ $(function () {
 
         }
     })
+    $('#itemNo').change(function () {
+        var togroup = $('#itemNo option:selected').val();
+        getDesc1(togroup);
+    })
+
+    $.ajax({
+        type:"POST",
+        url:"/require/detail/getItemNo",
+        async:true,
+        dataType:"json",
+        success:function (data) {
+            data.forEach(function (item) {
+                $('#itemNo').append("<option value="+item+">"+item+"</option>");
+            })
+        }
+    })
+
+    $.ajax({
+        type:"POST",
+        url:"/require/detail/getUnit",
+        async:true,
+        dataType:"json",
+        success:function (data) {
+            data.forEach(function (unit) {
+                $("#unit").append("<option value="+unit+">"+unit+"</option>")
+            })
+
+        }
+    })
+
+    $("#save").click(function () {
+        var prno=$('#pr2no').val();
+        var Revision=$('#pr2Revision').val();
+        var seqno=$('#seqno').val();
+        var desc1=$('#desc1').val();
+        var desc2=$('#desc2').val();
+        var RQTY=$('#RQTY').val();
+        var usedInfo1=$('#usedInfo1').val();
+        var usedInfo2=$('#usedInfo2').val();
+        var usedInfo3=$('#usedInfo3').val();
+        var itemNo = $('#itemNo option:selected').val();
+        var unit = $('#unit option:selected').val();
+        var projtype = $('#projtype2 option:selected').val();
+        var operation = $('#operation').val();
+        alert(seqno);
+        $.ajax({
+            type:"POST",
+            url:"/require/detail/pr02/"+operation,
+            async:true,
+            data:{
+                "prno":prno,
+                "revision":Revision,
+                "seqno":seqno,
+                "desc1":desc1,
+                "desc2":desc2,
+                "rqty":RQTY,
+                "usedInfo1":usedInfo1,
+                "usedInfo2":usedInfo2,
+                "usedInfo3":usedInfo3,
+                "itemNo":itemNo,
+                "unit":unit,
+                "projtype":projtype,
+            },
+            dataType:"json",
+            success:function (data) {
+                console.info(data)
+                if (data==="success"){
+                    alert("操作成功！");
+                    $('#myModal').modal("hide");
+                    window.location.reload();
+                } else if (data==="noAuthority"){
+                    alert("沒有權限！");
+                } else if (data==="noAdd") {
+                    alert("這資料已經過數或取消，資料內容不能更改!");
+                }else if (data==="noLogin"){
+                    alert("你還沒有登錄，請先登陸！");
+                } else{
+                    alert("操作失敗!");
+                }
+                $('#myModal').modal("hide");
+            }
+        })
+    })
 });
 
 function transValue(object) {
     alert(object);
 }
 
-function checkDetail(prno) {
+//新增功能
+function add() {
+    var prno = $('#prno').val();
+    var revision = $('#vision').val();
+    empty();
+    $('#myModal').modal("show");
+    getNewSeqNo(prno,revision);
+    $('#pr2no').val(prno);
+    $('#operation').val("add");
+    $('#myModalLabel').val("添加");
+    $('#pr2Revision').val(revision);
 
 }
 
@@ -615,3 +704,51 @@ function timestampToTime(timestamp) {
     var date = new Date(timestamp);
     return date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + date.getDate()
 }
+
+//清空輸入框
+function empty() {
+    $('#pr2no').val("");
+    $('#pr2Revision').val("");
+    $('#seqno').val("");
+    $('#desc1').val("");
+    $('#desc2').val("");
+    $('#rqty').val("");
+    $('#issueTrue').val("");
+    $('#usedInfo1').val("");
+    $('#usedInfo2').val("");
+    $('#usedInfo3').val("");
+}
+
+//獲得新的序號
+function getNewSeqNo(prno,revision) {
+    $.ajax({
+        type:"POST",
+        url:"/require/detail/getNewSeqNo",
+        async:true,
+        data:{
+            "prno":prno,
+            "revision":revision,
+        },
+        dataType:"json",
+        success:function (data) {
+            $('#seqno').val(data);
+        }
+    })
+}
+
+
+function getDesc1(itemNo) {
+    $.ajax({
+        type:"POST",
+        url:"/require/detail/getDesc1",
+        async:true,
+        data:{
+            "itemNo":itemNo
+        },
+        dataType:"json",
+        success:function (data) {
+            $("#desc1").val(data);
+        }
+    })
+}
+

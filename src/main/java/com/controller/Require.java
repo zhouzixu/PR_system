@@ -3,14 +3,13 @@ package com.controller;
 import com.Units.*;
 import com.alibaba.fastjson.JSON;
 import com.model.Pr01;
+import com.model.Pr01Key;
+import com.model.Unit;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +49,6 @@ public class Require {
     public String requireDetail(HttpServletRequest request, Model model){
         String prno = request.getParameter("prno");
         String revision = request.getParameter("revision");
-        System.out.println(prno+" "+revision);
         String result = JudgeLogin.judge(request,"pur_require_detail","login");
         model.addAttribute("prno",prno);
         model.addAttribute("revision",revision);
@@ -257,6 +255,7 @@ public class Require {
         }
     }
 
+    //獲得要求表的詳細信息頁的數據
     @RequestMapping(value = "/detail/getData")
     @ResponseBody
     public Pr01 require_detail_getData(HttpServletRequest request){
@@ -264,6 +263,43 @@ public class Require {
         String revision = request.getParameter("revision");
         Pr01 pr01 = pr01Service.getDataByPrimaryKey(prno,revision);
         return pr01;
+    }
+
+    @RequestMapping(value = "/detail/getItemNo",method = RequestMethod.POST)
+    @ResponseBody
+    public List<String> getItemNo(){;
+        return pr02Service.getItemNo();
+    }
+
+    @RequestMapping(value = "/detail/getUnit",method = RequestMethod.POST)
+    @ResponseBody
+    public List<String> getUnit(){
+        return pr02Service.getUnit();
+    }
+
+    @RequestMapping(value = "/detail/getNewSeqNo",method = RequestMethod.POST)
+    @ResponseBody
+    public String getNewSeqno(HttpServletRequest request){
+        String prno = request.getParameter("prno");
+        String revision = request.getParameter("revision");
+        Pr01Key pr01Key = new Pr01Key();
+        pr01Key.setPrno(prno);
+        pr01Key.setRevision(revision);
+        String num = pr02Service.getNewSeqNo(pr01Key);
+        System.out.println(num);
+        return num;
+    }
+
+    @RequestMapping(value = "/detail/getDesc1",method = RequestMethod.POST)
+    @ResponseBody
+    public String getDesc1(@RequestParam("itemNo") String itemNo){
+        return pr02Service.getItemDesc1(itemNo);
+    }
+
+    @RequestMapping(value = "/detail/pr02/add",method = RequestMethod.POST)
+    @ResponseBody
+    public String pr02Add(HttpServletRequest request){
+        return pr02Service.add(request);
     }
 
     //测试导出word

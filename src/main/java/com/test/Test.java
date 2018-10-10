@@ -83,23 +83,28 @@ public class Test {
     @org.junit.Test
     public void test2(){
 
-        DataTableRequest_require_detail dt = new DataTableRequest_require_detail();
-        Order order = new Order();
-        order.setDir("asc");
-        order.setColumn(0);
-        order.setRealColumn("SEQNO");
-        List<Order> list = new ArrayList<>();
-        list.add(order);
-        Search search = new Search();
-        search.setRegex(false);
-        search.setValue("");
-        dt.setDraw(1);
-        dt.setOrders(list);
-        dt.setPrno("PR00036624");
-        dt.setRevision("0");
-        dt.setStart(0);
-        dt.setLength(10);
-//        System.out.println(JSON.toJSONString(pr02Service.dtSelect(dt)));
+//        DataTableRequest_require_detail dt = new DataTableRequest_require_detail();
+//        Order order = new Order();
+//        order.setDir("asc");
+//        order.setColumn(0);
+//        order.setRealColumn("SEQNO");
+//        List<Order> list = new ArrayList<>();
+//        list.add(order);
+//        Search search = new Search();
+//        search.setRegex(false);
+//        search.setValue("");
+//        dt.setDraw(1);
+//        dt.setOrders(list);
+//        dt.setPrno("PR00036624");
+//        dt.setRevision("0");
+//        dt.setStart(0);
+//        dt.setLength(10);
+//        List<String> list1 = new ArrayList<>();
+//        System.out.println(JSON.toJSONString(pr02Service.dtSelect(dt,list1)));
+        Pr01Key pr01Key = new Pr01Key();
+        pr01Key.setRevision("0");
+        pr01Key.setPrno("PR00000446");
+        System.out.println(JSON.toJSONString(pr02Service.getNewSeqNo(pr01Key)));
     }
 
 }

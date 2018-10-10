@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Item01Mapper">
+  <resultMap id="BaseResultMap" type="com.model.Item01">
+    <id column="ITEMNO" jdbcType="CHAR" property="itemno" />
+    <result column="DESC1" jdbcType="CHAR" property="desc1" />
+    <result column="DESC2" jdbcType="CHAR" property="desc2" />
+    <result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="BASEUNIT" jdbcType="CHAR" property="baseunit" />
+    <result column="UNITPRICE" jdbcType="DECIMAL" property="unitprice" />
+    <result column="UNITCUR" jdbcType="CHAR" property="unitcur" />
+    <result column="MANU" jdbcType="CHAR" property="manu" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.model.Item01WithBLOBs">
+    <result column="PICT" jdbcType="LONGVARBINARY" property="pict" />
+    <result column="REMARK" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ITEMNO, DESC1, DESC2, CREATEDATE, BASEUNIT, UNITPRICE, UNITCUR, MANU
+  </sql>
+  <sql id="Blob_Column_List">
+    PICT, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ITEM01
+    where ITEMNO = #{itemno,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ITEM01
+    where ITEMNO = #{itemno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.model.Item01WithBLOBs">
+    insert into ITEM01 (ITEMNO, DESC1, DESC2, 
+      CREATEDATE, BASEUNIT, UNITPRICE, 
+      UNITCUR, MANU, PICT, 
+      REMARK)
+    values (#{itemno,jdbcType=CHAR}, #{desc1,jdbcType=CHAR}, #{desc2,jdbcType=CHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{baseunit,jdbcType=CHAR}, #{unitprice,jdbcType=DECIMAL}, 
+      #{unitcur,jdbcType=CHAR}, #{manu,jdbcType=CHAR}, #{pict,jdbcType=LONGVARBINARY}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.Item01WithBLOBs">
+    insert into ITEM01
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="desc1 != null">
+        DESC1,
+      </if>
+      <if test="desc2 != null">
+        DESC2,
+      </if>
+      <if test="createdate != null">
+        CREATEDATE,
+      </if>
+      <if test="baseunit != null">
+        BASEUNIT,
+      </if>
+      <if test="unitprice != null">
+        UNITPRICE,
+      </if>
+      <if test="unitcur != null">
+        UNITCUR,
+      </if>
+      <if test="manu != null">
+        MANU,
+      </if>
+      <if test="pict != null">
+        PICT,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemno != null">
+        #{itemno,jdbcType=CHAR},
+      </if>
+      <if test="desc1 != null">
+        #{desc1,jdbcType=CHAR},
+      </if>
+      <if test="desc2 != null">
+        #{desc2,jdbcType=CHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baseunit != null">
+        #{baseunit,jdbcType=CHAR},
+      </if>
+      <if test="unitprice != null">
+        #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="unitcur != null">
+        #{unitcur,jdbcType=CHAR},
+      </if>
+      <if test="manu != null">
+        #{manu,jdbcType=CHAR},
+      </if>
+      <if test="pict != null">
+        #{pict,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Item01WithBLOBs">
+    update ITEM01
+    <set>
+      <if test="desc1 != null">
+        DESC1 = #{desc1,jdbcType=CHAR},
+      </if>
+      <if test="desc2 != null">
+        DESC2 = #{desc2,jdbcType=CHAR},
+      </if>
+      <if test="createdate != null">
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baseunit != null">
+        BASEUNIT = #{baseunit,jdbcType=CHAR},
+      </if>
+      <if test="unitprice != null">
+        UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="unitcur != null">
+        UNITCUR = #{unitcur,jdbcType=CHAR},
+      </if>
+      <if test="manu != null">
+        MANU = #{manu,jdbcType=CHAR},
+      </if>
+      <if test="pict != null">
+        PICT = #{pict,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ITEMNO = #{itemno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.Item01WithBLOBs">
+    update ITEM01
+    set DESC1 = #{desc1,jdbcType=CHAR},
+      DESC2 = #{desc2,jdbcType=CHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      BASEUNIT = #{baseunit,jdbcType=CHAR},
+      UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+      UNITCUR = #{unitcur,jdbcType=CHAR},
+      MANU = #{manu,jdbcType=CHAR},
+      PICT = #{pict,jdbcType=LONGVARBINARY},
+      REMARK = #{remark,jdbcType=LONGVARCHAR}
+    where ITEMNO = #{itemno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Item01">
+    update ITEM01
+    set DESC1 = #{desc1,jdbcType=CHAR},
+      DESC2 = #{desc2,jdbcType=CHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      BASEUNIT = #{baseunit,jdbcType=CHAR},
+      UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+      UNITCUR = #{unitcur,jdbcType=CHAR},
+      MANU = #{manu,jdbcType=CHAR}
+    where ITEMNO = #{itemno,jdbcType=CHAR}
+  </update>
+
+  <select id="findAllItemNo" resultType="java.lang.String">
+    select itemno from ITEM01
+  </select>
+
+  <select id="findDesc1ByItemNo" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT desc1 from ITEM01 where itemno=#{itemno}
+  </select>
+</mapper>

@@ -826,4 +826,8 @@
       <!--${order.realColumn} ${order.dir}-->
     <!--</foreach>-->
   </select>
+
+  <select id="getSeqNoByPr01Key" parameterType="com.model.Pr01Key" resultType="java.lang.String">
+    SELECT  seqno FROM(SELECT * FROM pr02 WHERE prno=#{prno} AND revision=#{revision})  t ORDER BY seqno DESC LIMIT 1
+  </select>
 </mapper>

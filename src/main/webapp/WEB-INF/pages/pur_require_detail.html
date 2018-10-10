@@ -576,18 +576,19 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" action="#" method="post">
-                    <div>要求表號：<input type="text" name="prno" id="prno1" readonly="readonly"></div><br>
-                    <div>部門編號：<input type="text" name="prsno" id="prsno"></div><br>
-                    <div>
-                        狀況：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <select id="statusMsg" name="statusMsg">
-                            <option value="未批核">未批核</option>
-                            <option value="已批核">已批核</option>
-                        </select>
-                    </div><br>
-                    <div>批核日期：<input type="date" name="approvedDate" id="approvedDate1"></div>
-                    <div>要求部門：<input type="text" name="toDep" id="toDep1"></div>
-                    <div>要求組別：<select id=""></select></div>
+                    <input type="hidden" id="pr2no">
+                    <input type="hidden" id="pr2Revision">
+                    <input type="hidden" id="seqno">
+                    <input type="hidden" id="operation">
+                    <div>物品編號：&nbsp<select id="itemNo" style="width: 170px"></select> </div><br>
+                    <div>描述（一）：<input type="text" id="desc1" readonly="readonly"> </div><br>
+                    <div>用戶描述：&nbsp<input type="text" id="desc2"></div><br>
+                    <div>要求數量：&nbsp<input type="text" id="RQTY"></div><br>
+                    <div>單&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp位：<select id="unit" style="width: 170px"></select> </div><br>
+                    <div>用途一：<input type="text" id="usedInfo1"></div><br>
+                    <div>用途二：<input type="text" id="usedInfo2"></div><br>
+                    <div>額外說明：&nbsp<textarea rows="5" id="usedInfo3" style="width: 100%"></textarea></div>
+
                 </form>
             </div>
             <div class="modal-footer">

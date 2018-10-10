@@ -423,7 +423,6 @@ function getGroup(TODEP) {
         dataType: "json",
         success: function (data) {
             data.forEach(function (group) {
-                console.info(group)
                 $('#toGroup').append("<option value=" + group + ">" + group + "</option>");
             })
         }

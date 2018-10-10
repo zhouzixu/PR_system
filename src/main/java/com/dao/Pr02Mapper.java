@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.DataEntity.DataTableRequest_require_detail;
+import com.model.Pr01Key;
 import com.model.Pr02;
 import com.model.Pr02Key;
 import com.model.Pr02WithBLOBs;
@@ -25,4 +26,6 @@ public interface Pr02Mapper {
     int getDataNum(Pr02 pr02);
 
     List<Pr02WithBLOBs> dataTableSelect(DataTableRequest_require_detail dt);
+
+    String getSeqNoByPr01Key(Pr01Key pr01Key);
 }
