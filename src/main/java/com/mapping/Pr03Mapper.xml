@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Pr03Mapper">
+  <resultMap id="BaseResultMap" type="com.model.Pr03">
+    <id column="PRNO" jdbcType="VARCHAR" property="prno" />
+    <id column="SEQNO" jdbcType="VARCHAR" property="seqno" />
+    <id column="SEQNO2" jdbcType="VARCHAR" property="seqno2" />
+    <result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="ISSUE" jdbcType="VARCHAR" property="issue" />
+    <result column="REVISION" jdbcType="CHAR" property="revision" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.model.Pr03">
+    <result column="REMARK" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRNO, SEQNO, SEQNO2, CREATEDATE, ISSUE, REVISION
+  </sql>
+  <sql id="Blob_Column_List">
+    REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.model.Pr03Key" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PR03
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and SEQNO = #{seqno,jdbcType=VARCHAR}
+      and SEQNO2 = #{seqno2,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.model.Pr03Key">
+    delete from PR03
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and SEQNO = #{seqno,jdbcType=VARCHAR}
+      and SEQNO2 = #{seqno2,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.model.Pr03">
+    insert into PR03 (PRNO, SEQNO, SEQNO2, 
+      CREATEDATE, ISSUE, REVISION, 
+      REMARK)
+    values (#{prno,jdbcType=VARCHAR}, #{seqno,jdbcType=VARCHAR}, #{seqno2,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{issue,jdbcType=VARCHAR}, #{revision,jdbcType=CHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.Pr03">
+    insert into PR03
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prno != null">
+        PRNO,
+      </if>
+      <if test="seqno != null">
+        SEQNO,
+      </if>
+      <if test="seqno2 != null">
+        SEQNO2,
+      </if>
+      <if test="createdate != null">
+        CREATEDATE,
+      </if>
+      <if test="issue != null">
+        ISSUE,
+      </if>
+      <if test="revision != null">
+        REVISION,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prno != null">
+        #{prno,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        #{seqno,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno2 != null">
+        #{seqno2,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issue != null">
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="revision != null">
+        #{revision,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Pr03">
+    update PR03
+    <set>
+      <if test="createdate != null">
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issue != null">
+        ISSUE = #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="revision != null">
+        REVISION = #{revision,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and SEQNO = #{seqno,jdbcType=VARCHAR}
+      and SEQNO2 = #{seqno2,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.Pr03">
+    update PR03
+    set CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      ISSUE = #{issue,jdbcType=VARCHAR},
+      REVISION = #{revision,jdbcType=CHAR},
+      REMARK = #{remark,jdbcType=LONGVARCHAR}
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and SEQNO = #{seqno,jdbcType=VARCHAR}
+      and SEQNO2 = #{seqno2,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Pr03">
+    update PR03
+    set CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      ISSUE = #{issue,jdbcType=VARCHAR},
+      REVISION = #{revision,jdbcType=CHAR}
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and SEQNO = #{seqno,jdbcType=VARCHAR}
+      and SEQNO2 = #{seqno2,jdbcType=VARCHAR}
+  </update>
+
+  <select id="dataTableSelect" parameterType="com.DataEntity.DataTableRequest_require_pr03" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+
+    FROM PR03
+
+    WHERE 1=1 AND PRNO=#{prno} AND REVISION=#{revision}
+
+    <if test="search!=null">
+      and( PRNO like concat("%",#{search.value},"%")
+      or REVISION like concat("%",#{search.value},"%")
+      or ISSUE like concat("%",#{search.value},"%")
+      or SEQNO like concat("%",#{search.value},"%")
+      or SEQNO2 like concat("%",#{search.value},"%")
+      or CREATEDATE like concat("%",#{search.value},"%")
+      or REMARK like concat("%",#{search.value},"%"))
+    </if>
+    <foreach collection="orders" item="order" open="order by " close=" " separator=",">
+      ${order.realColumn} ${order.dir}
+    </foreach>
+
+  </select>
+</mapper>

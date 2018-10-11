@@ -12,7 +12,7 @@
         </commentGenerator>
         <!--mysql数据库连接-->
         <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/pr_sd" userId="root" password="123456"/>-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.169.243:3307/PR_SD" userId="root" password="root"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.169.243:3307/PR_SD20181011" userId="root" password="root"/>
         <!--生成model实体类文件位置-->
         <javaModelGenerator targetPackage="com.model"
                             targetProject="src/main/java">
@@ -30,7 +30,7 @@
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="UNIT" domainObjectName="Unit"
+        <table tableName="PR04" domainObjectName="Pr04"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

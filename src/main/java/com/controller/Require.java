@@ -4,6 +4,7 @@ import com.Units.*;
 import com.alibaba.fastjson.JSON;
 import com.model.Pr01;
 import com.model.Pr01Key;
+import com.model.Pr04;
 import com.model.Unit;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -286,7 +287,6 @@ public class Require {
         pr01Key.setPrno(prno);
         pr01Key.setRevision(revision);
         String num = pr02Service.getNewSeqNo(pr01Key);
-        System.out.println(num);
         return num;
     }
 
@@ -300,6 +300,65 @@ public class Require {
     @ResponseBody
     public String pr02Add(HttpServletRequest request){
         return pr02Service.add(request);
+    }
+
+    @RequestMapping(value = "/detail/pr02/update",method = RequestMethod.POST)
+    @ResponseBody
+    public String pr02Update(HttpServletRequest request){
+        return pr02Service.update(request);
+    }
+
+    @RequestMapping(value = "/detail/pr02/del",method = RequestMethod.POST)
+    @ResponseBody
+    public String pr02Del(HttpServletRequest request){
+
+        return pr02Service.del(request);
+    }
+
+    @RequestMapping(value = "/pr04/getSeqnoAndItemNo",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Map<String,String>> getSeqnoAndItemNo(@RequestParam("prno") String prno){
+        return pr02Service.getAllByPrimaryKey(prno);
+    }
+
+    @RequestMapping(value = "/pr04/getPr04Seqno",method = RequestMethod.POST)
+    @ResponseBody
+    public String getNewPr04Seqno(@RequestParam("prno") String prno){
+        return pr02Service.get_new_pr04_seqno(prno);
+    }
+
+    @RequestMapping(value = "/pr04/add",method = RequestMethod.POST)
+    @ResponseBody
+    public String pr04Add(HttpServletRequest request){
+        int num = pr02Service.pr04Add(request);
+        if (num==1){
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    @RequestMapping(value = "/pr04/update",method = RequestMethod.POST)
+    @ResponseBody
+    public String pr04Update(HttpServletRequest request){
+        int num = pr02Service.pr04Update(request);
+        if (num==1){
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    @RequestMapping(value = "/pr04/del",method = RequestMethod.POST)
+    @ResponseBody
+    public String pr04Delete(HttpServletRequest request){
+        int num = pr02Service.pr04Delete(request);
+        if (num == 1) {
+
+            return "success";
+        }else{
+            return "fail";
+        }
     }
 
     //测试导出word

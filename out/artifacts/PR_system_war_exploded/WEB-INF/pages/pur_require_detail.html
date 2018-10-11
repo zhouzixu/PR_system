@@ -315,17 +315,17 @@
                         <div class="box-body">
                             <ul id="myTab" class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#first" data-toggle="tab">
+                                    <a href="#first" data-toggle="tab" id="tab1">
                                         要求表資料
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#second" data-toggle="tab">
+                                    <a href="#second" data-toggle="tab" id="tab2">
                                         回復資料
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#third" data-toggle="tab">
+                                    <a href="#third" data-toggle="tab" id="tab3">
                                         交貨期備註
                                     </a>
                                 </li>
@@ -580,6 +580,7 @@
                     <input type="hidden" id="pr2Revision">
                     <input type="hidden" id="seqno">
                     <input type="hidden" id="operation">
+                    <input type="hidden" id="status2">
                     <div>物品編號：&nbsp<select id="itemNo" style="width: 170px"></select> </div><br>
                     <div>描述（一）：<input type="text" id="desc1" readonly="readonly"> </div><br>
                     <div>用戶描述：&nbsp<input type="text" id="desc2"></div><br>
@@ -594,6 +595,32 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" id="save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">修改</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="#" method="post">
+                    <input type="hidden" id="pr04no">
+                    <input type="hidden" id="prseqno">
+                    <input type="hidden" id="operation1">
+                    <div>序&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp號：<input type="text" id="remseqno" readonly="readonly" style="background-color: #EEEEEE;"></div><br>
+                    <div>物品編號：<select id="itemNo1" style="width: 170px"></select> </div><br>
+                    <div>備註：<textarea rows="5" id="pr04remark" style="width: 100%;"></textarea> </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="save1">保存</button>
             </div>
         </div>
     </div>

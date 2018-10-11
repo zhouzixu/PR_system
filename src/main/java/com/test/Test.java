@@ -6,10 +6,10 @@ import com.Units.DateUtil;
 import com.Units.ReadIniInfo;
 import com.alibaba.fastjson.JSON;
 import com.dao.Pr01Mapper;
+import com.dao.Pr02Mapper;
+import com.dao.Pr04Mapper;
 import com.dao.UserProfileMapper;
-import com.model.Pr01;
-import com.model.Pr01Key;
-import com.model.UserProfileWithBLOBs;
+import com.model.*;
 import com.service.*;
 import com.service.UserInfoService;
 import org.apache.log4j.Logger;
@@ -43,13 +43,17 @@ public class Test {
     private UserProfileMapper userProfileMapper;
 
     @Autowired
-    private Pr01Mapper pr01Mapper;
+    private Pr04Mapper pr04Mapper;
 
     @Autowired
     private Pr01Service pr01Service;
 
     @Autowired
     private Pr02Service pr02Service;
+
+    @Autowired
+    private Pr02Mapper pr02Mapper;
+
 
     @org.junit.Test
     public void test() throws ParseException {
@@ -77,13 +81,13 @@ public class Test {
         Pr01Key key = new Pr01Key();
         key.setPrno("PR00002085");
         key.setRevision("0");
-        System.out.println(pr01Mapper.deleteByPrimaryKey(key));
+//        System.out.println(pr04Mapper.deleteByPrimaryKey(key));
     }
 
     @org.junit.Test
     public void test2(){
 
-//        DataTableRequest_require_detail dt = new DataTableRequest_require_detail();
+//        DataTableRequest_require_pr03 dt = new DataTableRequest_require_pr03();
 //        Order order = new Order();
 //        order.setDir("asc");
 //        order.setColumn(0);
@@ -95,16 +99,34 @@ public class Test {
 //        search.setValue("");
 //        dt.setDraw(1);
 //        dt.setOrders(list);
-//        dt.setPrno("PR00036624");
+//        dt.setPrno("PR00001681");
 //        dt.setRevision("0");
 //        dt.setStart(0);
 //        dt.setLength(10);
 //        List<String> list1 = new ArrayList<>();
-//        System.out.println(JSON.toJSONString(pr02Service.dtSelect(dt,list1)));
-        Pr01Key pr01Key = new Pr01Key();
-        pr01Key.setRevision("0");
-        pr01Key.setPrno("PR00000446");
-        System.out.println(JSON.toJSONString(pr02Service.getNewSeqNo(pr01Key)));
+//        System.out.println(JSON.toJSONString(pr02Service.dtSelect_pr03(dt)));
+
+
+
+//        Pr01Key pr01Key = new Pr01Key();
+//        pr01Key.setRevision("0");
+//        pr01Key.setPrno("PR00037179");
+//        System.out.println(JSON.toJSONString(pr02Service.getNewSeqNo(pr01Key)));
+
+//        Pr02WithBLOBs pr02WithBLOBs = new Pr02WithBLOBs();
+//        pr02WithBLOBs.setPrno("PR00037179");
+//        pr02WithBLOBs.setRevision("0");
+//        pr02WithBLOBs.setSeqno("00001");
+//        pr02WithBLOBs.setDesc2("9999999999");
+//        System.out.println(JSON.toJSONString(pr02WithBLOBs));
+//        System.out.println(pr02Mapper.updateByPrimaryKeySelective(pr02WithBLOBs));
+        Pr04 pr04 = new Pr04();
+        pr04.setPrno("PR00037179");
+        pr04.setPrseqno("00004");
+        pr04.setRemark("98765431232055");
+        pr04.setItemno("0.11*25*25-BK-00");
+        pr04.setRemseqno("00003");
+        System.out.println(pr04Mapper.updateByPrimaryKeySelective(pr04));
     }
 
 }

@@ -1,16 +1,19 @@
+var table1;
+var table2;
+var table3;
 $(function () {
     var setPrno = $('#setPrno').val();
     var setVision = $('#setVision').val();
-    var table1 = $('#table1').DataTable({
+    table1 = $('#table1').DataTable({
         "scrollX": true,
-        "scrollY": "600px",
+        "scrollY": "450px",
         "autoWidth": true,
         "processing": true,
         "dom": "<'row'<'#mytool.col-xs-2'>r>" +
         "t" +
         "<'row'<'col-xs-6'i><'col-xs-6'p>>",
         "initComplete": function (settings, data) {
-            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" onclick="add()">添加</button>');
+            $("#mytool").append('<button type="button" class="btn btn-default btn-sm" onclick="pr02_add()">添加</button>');
             if ($.inArray("ALL", data.data[0].AUTH) == -1 && $.inArray("VIEWPRICE", data.data[0].AUTH) == -1) {
                 table1.column(15).visible(false);
                 table1.column(13).visible(false);
@@ -30,7 +33,6 @@ $(function () {
                 data.prno = $.trim(setPrno);
                 data.revision = $.trim(setVision);
                 data = JSON.stringify(data);
-                console.info(data);
                 return data;
             },
             dataType: "json",
@@ -40,7 +42,7 @@ $(function () {
         "columns": [
             {
                 "data": null,
-                "width": "75px",
+                "width": "85px",
                 "title": "提示信息",
                 "sDefaultContent": "",
                 "orderable": false,
@@ -94,6 +96,18 @@ $(function () {
                     return temp;
                 }
             },
+            // {
+            //   "data":"PRNO",
+            //   "width":"10px",
+            //   "sDefaultContent":"",
+            //   "visible":false
+            // },
+            // {
+            //     "data":"REVISION",
+            //     "width":"10px",
+            //     "sDefaultContent":"",
+            //     "visible":false
+            // },
             {
                 "data": "SEQNO",
                 "width": "30px",
@@ -388,8 +402,8 @@ $(function () {
                 "searchable": false,
                 "orderable": false,
                 "render": function (data, type, row, meta) {
-                    return '<button class="btn btn-info btn-sm" data-toggle="modal"  data-target="#myModal" onclick="transValue(' + "\'" + row.PRNO + "\'" + ')" ><i class="fa fa-pencil"></i>修改</button>'
-                        + '<button class="btn btn-danger btn-sm" onclick="checkDetail(' + "\'" + row.PRNO + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
+                    return '<button class="btn btn-info btn-sm"  onclick="pr02_update(' + "\'" + row.SEQNO + "\'," + "\'" + row.ITEMNO + "\'," + "\'" + row.DESC1 + "\'," + "\'" + row.DESC2 + "\'," + "\'" + row.RQTY + "\'," + "\'" + row.UNIT + "\'," + "\'" + row.USEDINFO1 + "\'," + "\'" + row.USEDINFO2 + "\'," + "\'" + row.USEDINFO3 + "\'," + "\'" + row.STATUS + "\'" + ')" ><i class="fa fa-pencil"></i>修改</button>'
+                        + '<button class="btn btn-danger btn-sm" onclick="pr02_del(' + "\'" + row.SEQNO + "\'," + "\'" + row.STATUS + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
                 }
             }
         ],
@@ -415,27 +429,43 @@ $(function () {
         "order": [[2, "desc"]]
     });
 
-    var table2 = $('#table2').DataTable({
+    table2 = $('#table2').DataTable({
         "scrollX": true,
         "scrollY": "400px",
         "autoWidth": false,
         "processing": true,
-        "paging": false,
+        "serverSide": true,
+        "ajax": {
+            "url": "/data/require/pr03",
+            "type": "POST",
+            "data": function (data) {
+                data.prno = $.trim(setPrno);
+                data.revision = $.trim(setVision);
+                data = JSON.stringify(data);
+                return data;
+            },
+            dataType: "json",
+            processData: false,
+            contentType: 'application/json;charset=UTF-8'
+        },
         "columns": [
             {
                 "data": "PRNO",
                 "width": "50px",
                 "title": "PRNO",
+                "sDefaultContent": ""
             },
             {
                 "data": "SEQNO",
                 "width": "50px",
                 "title": "SEQNO",
+                "sDefaultContent": ""
             },
             {
                 "data": "REMARK",
                 "width": "80px",
                 "title": "REMARK",
+                "sDefaultContent": "",
                 "render": function (data, type, row, meta) {
                     if (data) {
                         if (data.length > 10) {
@@ -449,22 +479,26 @@ $(function () {
             {
                 "data": "ISSUE",
                 "width": "40px",
-                "title": "ISSUE"
+                "title": "ISSUE",
+                "sDefaultContent": ""
             },
             {
                 "data": "CREATEDATE",
                 "width": "90px",
-                "title": "CREATEDATE"
+                "title": "CREATEDATE",
+                "sDefaultContent": ""
             },
             {
                 "data": "SEQNO2",
                 "width": "50px",
-                "title": "SEQNO2"
+                "title": "SEQNO2",
+                "sDefaultContent": ""
             },
             {
                 "data": "REVISION",
                 "width": "30px",
-                "title": "REVISION"
+                "title": "REVISION",
+                "sDefaultContent": ""
             }
         ],
         "fixedHeader": true,
@@ -485,58 +519,79 @@ $(function () {
         "order": [[0, "desc"]]
     });
 
-    var table3 = $('#table3').DataTable({
+    table3 = $('#table3').DataTable({
         "scrollX": true,
         "scrollY": "400px",
-        "autoWidth": false,
+        "autoWidth": true,
         "processing": true,
-        "paging": false,
         "dom": "<'row'<'#mytool1.col-xs-2'><'col-xs-10'f>r>" +
         "t" +
         "<'row'<'col-xs-6'i><'col-xs-6'p>>",
         "initComplete": function () {
-            $("#mytool1").append('<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">添加</button>');
+            $("#mytool1").append('<button type="button" class="btn btn-default btn-sm" onclick="pr04_add()">添加</button>');
+        },
+        "serverSide": true,
+        "ajax": {
+            "url": "/data/require/pr04",
+            "type": "POST",
+            "data": function (data) {
+                data.prno = $.trim(setPrno);
+                data.revision = $.trim(setVision);
+                data = JSON.stringify(data);
+                console.info(data);
+                return data;
+            },
+            dataType: "json",
+            processData: false,
+            contentType: 'application/json;charset=UTF-8'
         },
         "columns": [
             {
                 "data": "REMSEQNO",
-                // "width":"40px",
+                "width":"40px",
+                "sDefaultContent": "",
                 "title": "序號1"
             },
             {
                 "data": "ITEMNO",
-                // "width":"40px",
+                "width":"40px",
+                "sDefaultContent": "",
                 "title": "物品編號"
             },
             {
                 "data": "CREATEDATE",
-                // "width":"60px",
+                "width":"60px",
+                "sDefaultContent": "",
                 "title": "建立日期"
             },
             {
                 "data": "REMARK",
-                // "width":"90px",
+                "width":"90px",
+                "sDefaultContent": "",
                 "title": "備註"
             },
             {
                 "data": "PRNO",
-                // "width":"60px",
+                "width":"60px",
+                "sDefaultContent": "",
                 "title": "要求表號"
             },
             {
                 "data": "PRSEQNO",
-                // "width":"40px",
+                "width":"40px",
+                "sDefaultContent": "",
                 "title": "序號2"
             },
             {
                 "data": null,
-                // "width": "120Px",
+                "width": "120Px",
+                "sDefaultContent": "",
                 "title": "操作",
                 "searchable": false,
                 "orderable": false,
                 "render": function (data, type, row, meta) {
-                    return '<button class="btn btn-info btn-sm" data-toggle="modal"  data-target="#myModal" onclick="transValue(' + "\'" + row.PRNO + "\'" + ')" ><i class="fa fa-pencil"></i>修改</button>'
-                        + '<button class="btn btn-danger btn-sm" onclick="checkDetail(' + "\'" + row.PRNO + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
+                    return '<button class="btn btn-info btn-sm"  onclick="pr04_update(' + "\'" + row.REMSEQNO + "\'," + "\'" + row.ITEMNO + "\'," +"\'" + row.REMARK + "\'," +"\'" + row.PRNO + "\'," +"\'" + row.PRSEQNO + "\'," +')" ><i class="fa fa-pencil"></i>修改</button>'
+                        + '<button class="btn btn-danger btn-sm" onclick="pr04_delete(' + "\'" + row.PRNO + "\'," + "\'" + row.PRSEQNO + "\'," + "\'" + row.REMSEQNO + "\'" + ')"><i class="fa fa-trash-o"></i>刪除</button>';
                 }
             }
         ],
@@ -558,7 +613,20 @@ $(function () {
             }
         },
         //將第一行進行升序，可選擇多行進行排序，在最外中括號中添加即可
-        "order": [[2, "desc"]]
+        "order": [[0, "desc"]]
+    })
+
+
+    $('#tab1').click(function () {
+        table1.draw("page");
+    })
+
+    $('#tab2').click(function () {
+        table2.draw("page");
+    })
+
+    $('#tab3').click(function () {
+        table3.draw("page");
     })
 
     //獲取pr01表中的數據，並且填入框中
@@ -598,80 +666,123 @@ $(function () {
     })
 
     $.ajax({
-        type:"POST",
-        url:"/require/detail/getItemNo",
-        async:true,
-        dataType:"json",
-        success:function (data) {
+        type: "POST",
+        url: "/require/detail/getItemNo",
+        async: true,
+        dataType: "json",
+        success: function (data) {
             data.forEach(function (item) {
-                $('#itemNo').append("<option value="+item+">"+item+"</option>");
+                $('#itemNo').append("<option value=" + item + ">" + item + "</option>");
             })
         }
     })
 
     $.ajax({
-        type:"POST",
-        url:"/require/detail/getUnit",
-        async:true,
-        dataType:"json",
-        success:function (data) {
+        type: "POST",
+        url: "/require/detail/getUnit",
+        async: true,
+        dataType: "json",
+        success: function (data) {
             data.forEach(function (unit) {
-                $("#unit").append("<option value="+unit+">"+unit+"</option>")
+                $("#unit").append("<option value=" + unit + ">" + unit + "</option>")
             })
 
         }
     })
 
     $("#save").click(function () {
-        var prno=$('#pr2no').val();
-        var Revision=$('#pr2Revision').val();
-        var seqno=$('#seqno').val();
-        var desc1=$('#desc1').val();
-        var desc2=$('#desc2').val();
-        var RQTY=$('#RQTY').val();
-        var usedInfo1=$('#usedInfo1').val();
-        var usedInfo2=$('#usedInfo2').val();
-        var usedInfo3=$('#usedInfo3').val();
+        var prno = $('#pr2no').val();
+        var Revision = $('#pr2Revision').val();
+        var seqno = $('#seqno').val();
+        var desc1 = $('#desc1').val();
+        var desc2 = $('#desc2').val();
+        var RQTY = $('#RQTY').val();
+        var usedInfo1 = $('#usedInfo1').val();
+        var usedInfo2 = $('#usedInfo2').val();
+        var usedInfo3 = $('#usedInfo3').val();
         var itemNo = $('#itemNo option:selected').val();
         var unit = $('#unit option:selected').val();
         var projtype = $('#projtype2 option:selected').val();
         var operation = $('#operation').val();
-        alert(seqno);
+        var status = $('#status2').val();
         $.ajax({
-            type:"POST",
-            url:"/require/detail/pr02/"+operation,
-            async:true,
-            data:{
-                "prno":prno,
-                "revision":Revision,
-                "seqno":seqno,
-                "desc1":desc1,
-                "desc2":desc2,
-                "rqty":RQTY,
-                "usedInfo1":usedInfo1,
-                "usedInfo2":usedInfo2,
-                "usedInfo3":usedInfo3,
-                "itemNo":itemNo,
-                "unit":unit,
-                "projtype":projtype,
+            type: "POST",
+            url: "/require/detail/pr02/" + operation,
+            async: true,
+            data: {
+                "prno": prno,
+                "revision": Revision,
+                "seqno": seqno,
+                "desc1": desc1,
+                "desc2": desc2,
+                "rqty": RQTY,
+                "usedInfo1": usedInfo1,
+                "usedInfo2": usedInfo2,
+                "usedInfo3": usedInfo3,
+                "itemNo": itemNo,
+                "unit": unit,
+                "projtype": projtype,
+                "status": status
             },
-            dataType:"json",
-            success:function (data) {
-                console.info(data)
-                if (data==="success"){
+            dataType: "json",
+            success: function (data) {
+                if (data === "success") {
                     alert("操作成功！");
                     $('#myModal').modal("hide");
-                    window.location.reload();
-                } else if (data==="noAuthority"){
+                    table1.draw("page");
+                } else if (data === "noAuthority") {
                     alert("沒有權限！");
-                } else if (data==="noAdd") {
+                } else if (data === "noAdd") {
                     alert("這資料已經過數或取消，資料內容不能更改!");
-                }else if (data==="noLogin"){
+                } else if (data === "noLogin") {
                     alert("你還沒有登錄，請先登陸！");
-                } else{
+                } else {
                     alert("操作失敗!");
                 }
                 $('#myModal').modal("hide");
+            }
+        })
+    })
+
+    $('#save1').click(function () {
+        var prno = $('#pr04no').val();
+        var prseqno = $('#itemNo1 option:selected').val();
+        var operation = $('#operation1').val();
+        var remseqno = $('#remseqno').val();
+        var itemno = $('#itemNo1 option:selected').text();
+        var remark = $('#pr04remark').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/require/pr04/" + operation,
+            async: true,
+            data:{
+                "prno":prno,
+                "prseqno":prseqno,
+                "remseqno":remseqno,
+                "itemno":itemno,
+                "remark":remark
+            },
+            // data: function (data) {
+            //     data.prno = prno;
+            //     data.prseqno = prseqno;
+            //     data.remseqno = remseqno;
+            //     data.itemno = itemni;
+            //     data.remark = remark;
+            //     data = JSON.stringify(data);
+            //     console.info(data);
+            //     return data;
+            // },
+            dataType: "json",
+            // contentType: 'application/josn;charset=UTF-8',
+            success: function (data) {
+                if (data === "success") {
+                    alert("操作成功!");
+                    table3.draw("page");
+                } else {
+                    alert("操作失敗！");
+                }
+                $('#myModal1').modal('hide');
             }
         })
     })
@@ -682,12 +793,12 @@ function transValue(object) {
 }
 
 //新增功能
-function add() {
+function pr02_add() {
     var prno = $('#prno').val();
     var revision = $('#vision').val();
     empty();
     $('#myModal').modal("show");
-    getNewSeqNo(prno,revision);
+    getNewSeqNo(prno, revision);
     $('#pr2no').val(prno);
     $('#operation').val("add");
     $('#myModalLabel').val("添加");
@@ -720,17 +831,17 @@ function empty() {
 }
 
 //獲得新的序號
-function getNewSeqNo(prno,revision) {
+function getNewSeqNo(prno, revision) {
     $.ajax({
-        type:"POST",
-        url:"/require/detail/getNewSeqNo",
-        async:true,
-        data:{
-            "prno":prno,
-            "revision":revision,
+        type: "POST",
+        url: "/require/detail/getNewSeqNo",
+        async: true,
+        data: {
+            "prno": prno,
+            "revision": revision,
         },
-        dataType:"json",
-        success:function (data) {
+        dataType: "json",
+        success: function (data) {
             $('#seqno').val(data);
         }
     })
@@ -739,15 +850,146 @@ function getNewSeqNo(prno,revision) {
 
 function getDesc1(itemNo) {
     $.ajax({
+        type: "POST",
+        url: "/require/detail/getDesc1",
+        async: true,
+        data: {
+            "itemNo": itemNo
+        },
+        dataType: "json",
+        success: function (data) {
+            $("#desc1").val(data);
+        }
+    })
+}
+
+function pr02_update(seqno, itemNo, desc1, desc2, rqty, unit, usedInfo1, usedInfo2, usedInfo3, status) {
+    var prno = $('#prno').val();
+    var revision = $('#vision').val();
+    empty();
+    $('#myModal').modal("show");
+    $('#pr2no').val(prno);
+    $('#operation').val("update");
+    $('#myModalLabel').val("修改");
+    $('#pr2Revision').val(revision);
+    $('#itemNo').val(itemNo);
+    $('#seqno').val(seqno);
+    $('#desc1').val(desc1);
+    $('#desc2').val(desc2);
+    $('#RQTY').val(rqty);
+    $('#unit').val(unit);
+    $('#usedInfo1').val(usedInfo1);
+    $('#usedInfo2').val(usedInfo2);
+    $('#usedInfo3').val(usedInfo3);
+    $('#status2').val(status);
+}
+
+function pr02_del(seqno, status) {
+    var prno = $('#prno').val();
+    var revision = $('#vision').val();
+    $.ajax({
+        type: "POST",
+        url: "/require/detail/pr02/del",
+        async: true,
+        data: {
+            "prno": prno,
+            "revision": revision,
+            "seqno": seqno,
+            "status": status
+        },
+        dataType: "json",
+        success: function (data) {
+            if (data === "success") {
+                table1.draw("page");
+                alert("操作成功！");
+            } else if (data === "noAuthority") {
+                alert("沒有權限！");
+            } else if (data === "noDel") {
+                alert("這資料已經過數或取消，資料內容不能更改!");
+            } else if (data === "noLogin") {
+                alert("你還沒有登錄，請先登陸！");
+            } else {
+                alert("操作失敗!");
+            }
+        },
+        error: function (data) {
+            alert(JSON.stringify(data));
+
+        }
+    })
+}
+
+function pr04_add() {
+    var prno = $('#setPrno').val();
+    $('#remseqno').val("");
+    $('#itemNo1').empty();
+    $('#pr04remark').val("");
+    $('#operation1').val("add");
+    $('#pr04no').val(prno);
+    $('#myModal1').modal('show');
+    $('#myModalLabel1').val("添加");
+
+    $.ajax({
+        type: "POST",
+        url: "/require/pr04/getSeqnoAndItemNo",
+        async: true,
+        data: {
+            "prno": prno,
+        },
+        dataType: "json",
+        success: function (data) {
+            console.info(JSON.stringify(data))
+            data.forEach(function (item) {
+                $('#itemNo1').append('<option value=' + item.seqno + '>' + item.itemno + '</option>')
+            })
+        }
+    })
+
+    $.ajax({
+        type: "POST",
+        url: "/require/pr04/getPr04Seqno",
+        async: true,
+        data: {
+            "prno": prno,
+        },
+        dataType: "json",
+        success: function (data) {
+            $('#remseqno').val(data);
+        }
+    })
+}
+
+function pr04_update(remseqno,itemno,remark,prno,prseqno) {
+    $('#itemNo1').empty();
+    $('#itemNo1').append('<option value='+prseqno+'>'+itemno+'</option>')
+    $('#pr04no').val(prno);
+    $('#prseqno').val(prseqno);
+    $('#operation1').val("update");
+    $('#remseqno').val(remseqno);
+    $('#pr04remark').val(remark);
+    $('#myModal1').modal("show");
+    $('#myModalLabel1').val("修改");
+
+}
+
+function pr04_delete(prno,prseqno,remseqno) {
+    $.ajax({
         type:"POST",
-        url:"/require/detail/getDesc1",
+        url:"/require/pr04/del",
         async:true,
         data:{
-            "itemNo":itemNo
+            "prno":prno,
+            "prseqno":prseqno,
+            "remseqno":remseqno
         },
         dataType:"json",
         success:function (data) {
-            $("#desc1").val(data);
+            if (data==="success"){
+                alert("操作成功！");
+                table3.draw("page");
+            } else{
+                alert("操作失敗！");
+            }
         }
     })
 }

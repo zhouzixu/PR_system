@@ -28,4 +28,6 @@ public interface Pr02Mapper {
     List<Pr02WithBLOBs> dataTableSelect(DataTableRequest_require_detail dt);
 
     String getSeqNoByPr01Key(Pr01Key pr01Key);
+
+    List<Pr02WithBLOBs> findByPrno (String prno);
 }

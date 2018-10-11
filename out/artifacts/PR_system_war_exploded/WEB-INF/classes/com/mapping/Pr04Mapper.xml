@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Pr04Mapper">
+  <resultMap id="BaseResultMap" type="com.model.Pr04">
+    <id column="PRNO" jdbcType="VARCHAR" property="prno" />
+    <id column="PRSEQNO" jdbcType="CHAR" property="prseqno" />
+    <id column="REMSEQNO" jdbcType="CHAR" property="remseqno" />
+    <result column="ITEMNO" jdbcType="VARCHAR" property="itemno" />
+    <result column="CREATEDATE" jdbcType="DATE" property="createdate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.model.Pr04">
+    <result column="REMARK" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRNO, PRSEQNO, REMSEQNO, ITEMNO, CREATEDATE
+  </sql>
+  <sql id="Blob_Column_List">
+    REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.model.Pr04Key" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PR04
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and PRSEQNO = #{prseqno,jdbcType=CHAR}
+      and REMSEQNO = #{remseqno,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.model.Pr04Key">
+    delete from PR04
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and PRSEQNO = #{prseqno,jdbcType=CHAR}
+      and REMSEQNO = #{remseqno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.model.Pr04">
+    insert into PR04 (PRNO, PRSEQNO, REMSEQNO, 
+      ITEMNO, CREATEDATE, REMARK
+      )
+    values (#{prno,jdbcType=VARCHAR}, #{prseqno,jdbcType=CHAR}, #{remseqno,jdbcType=CHAR}, 
+      #{itemno,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.Pr04">
+    insert into PR04
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prno != null">
+        PRNO,
+      </if>
+      <if test="prseqno != null">
+        PRSEQNO,
+      </if>
+      <if test="remseqno != null">
+        REMSEQNO,
+      </if>
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="createdate != null">
+        CREATEDATE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prno != null">
+        #{prno,jdbcType=VARCHAR},
+      </if>
+      <if test="prseqno != null">
+        #{prseqno,jdbcType=CHAR},
+      </if>
+      <if test="remseqno != null">
+        #{remseqno,jdbcType=CHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Pr04">
+    update PR04
+    <set>
+      <if test="itemno != null">
+        ITEMNO = #{itemno,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        CREATEDATE = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and PRSEQNO = #{prseqno,jdbcType=CHAR}
+      and REMSEQNO = #{remseqno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.Pr04">
+    update PR04
+    set ITEMNO = #{itemno,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=LONGVARCHAR}
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and PRSEQNO = #{prseqno,jdbcType=CHAR}
+      and REMSEQNO = #{remseqno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Pr04">
+    update PR04
+    set ITEMNO = #{itemno,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=DATE}
+    where PRNO = #{prno,jdbcType=VARCHAR}
+      and PRSEQNO = #{prseqno,jdbcType=CHAR}
+      and REMSEQNO = #{remseqno,jdbcType=CHAR}
+  </update>
+
+  <select id="dtSelect" parameterType="com.DataEntity.DataTableRequest_require_detail" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PR04 WHERE 1=1 AND PRNO=#{prno}
+
+    <if test="search!=null">
+      and( PRNO like concat("%",#{search.value},"%")
+      or PRSEQNO like concat("%",#{search.value},"%")
+      or REMSEQNO like concat("%",#{search.value},"%")
+      or ITEMNO like concat("%",#{search.value},"%")
+      or CREATEDATE like concat("%",#{search.value},"%")
+      or REMARK like concat("%",#{search.value},"%"))
+    </if>
+    <foreach collection="orders" item="order" open="order by " close=" " separator=",">
+      ${order.realColumn} ${order.dir}
+    </foreach>
+  </select>
+
+  <select id="getRemSeqnoByPrno" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT  REMSEQNO FROM(SELECT * FROM PR04 WHERE PRNO=#{prno})  t ORDER BY REMSEQNO DESC LIMIT 1
+  </select>
+</mapper>

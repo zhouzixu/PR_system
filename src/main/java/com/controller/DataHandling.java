@@ -2,6 +2,7 @@ package com.controller;
 
 import com.DataEntity.DataTableRequest;
 import com.DataEntity.DataTableRequest_require_detail;
+import com.DataEntity.DataTableRequest_require_pr03;
 import com.DataEntity.DataTableResponse;
 import com.Units.DataTableUnits;
 import com.alibaba.fastjson.JSON;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.RequestingUserName;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -43,6 +45,22 @@ public class DataHandling {
         List<String> auth = authority.get("01");
         DataTableUnits.orderChange(dbr);
         DataTableResponse dtResponse = pr02Service.dtSelect(dbr,auth);
+        return dtResponse;
+    }
+
+    @RequestMapping(value = "/require/pr03",method = RequestMethod.POST)
+    @ResponseBody
+    public DataTableResponse requirePr03(@RequestBody DataTableRequest_require_pr03 dbr){
+        DataTableUnits.orderChange(dbr);
+        DataTableResponse dtResponse = pr02Service.dtSelect_pr03(dbr);
+        return dtResponse;
+    }
+
+    @RequestMapping(value = "/require/pr04",method = RequestMethod.POST)
+    @ResponseBody
+    public DataTableResponse requirePr04(@RequestBody DataTableRequest_require_detail dbr){
+        DataTableUnits.orderChange(dbr);
+        DataTableResponse dtResponse = pr02Service.dtSelect_pr04(dbr);
         return dtResponse;
     }
 }
